@@ -35,7 +35,7 @@ const App = () => {
             objectFit: 'contain',
             maxWidth: '100%',
             objectPosition: 'center',
-            display: 'block'
+            display: 'block',
           }}
           alt="maintenance"
         />
@@ -91,12 +91,8 @@ const App = () => {
             <Input.Password />
           </Form.Item>
 
-          <Form.Item name="remember" valuePropName="checked" label={null}>
-            <Checkbox>Remember me</Checkbox>
-          </Form.Item>
-
           <Form.Item label={null}>
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submit" className='button'>
               Submit
             </Button>
           </Form.Item>
