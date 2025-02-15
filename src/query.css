@@ -1,0 +1,120 @@
+.button {
+    background-color: #007E87;
+    border-color: #007E87;
+    color: white !important;
+    border-radius: 10px;
+}
+
+.button:hover {
+    background-color: #00585e !important;
+    border-color: #00585e  !important;
+    color: white !important;
+}
+
+.button:active {
+    transform: scale(0.98);
+    background-color: #00585e !important;
+    border-color: #00585e  !important;
+    color: white !important;
+}
+
+
+.title {
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    margin-top: 20px;
+    gap: 20px;
+}
+
+
+.query_container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.query_container .ant-form {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    background-color: #f5f5f5;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.query-button {
+    background-color: transparent;
+    border-radius: 10px;
+    border: none;
+    color: rgb(139, 139, 139) !important;
+}
+
+.query-button.active {
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: rgba(0, 0, 0, 0.88) !important;
+}
+
+.customer-list {
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.customer-list h2 {
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.customer-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.customer-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.customer-phone {
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.customer-car {
+    background-color: #f5f5f5;
+    padding: 8px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+}
+
+.maintenance-info {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.detail-button {
+    background-color: #f0f0f0 !important;
+    border: none !important;
+    border-radius: 6px !important;
+    color: rgba(0, 0, 0, 0.88) !important;
+  }
+  
+  .detail-button:hover {
+    background-color: #727272 !important;
+    color: white !important;
+  }

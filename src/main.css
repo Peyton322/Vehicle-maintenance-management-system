@@ -1,0 +1,12 @@
+.background {
+    background-color: #C0DCDE;
+    height: 300px;
+    width: 100%;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
