@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Checkbox, Form, Input, message } from 'antd';
-import { HashRouter as useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './main.css';
 const App = () => {
   const navigate = useNavigate();
