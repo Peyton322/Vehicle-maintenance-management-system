@@ -93,7 +93,7 @@ const App = () => {
 
           <Form.Item label={null}>
             <Button type="primary" htmlType="submit" className='button'>
-              Submit
+              登入
             </Button>
           </Form.Item>
         </Form>
