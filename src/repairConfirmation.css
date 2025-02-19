@@ -1,0 +1,120 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fdfdfd;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .repair-confirmation-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .status-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .status-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 16px;
+    color: rgba(0, 0, 0, 0.88);
+  }
+  
+  .button {
+    background-color: #007e87b2;
+    border-color: #007E87;
+    color: white !important;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 800px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .button:hover {
+    background-color: #00585e !important;
+    border-color: #00585e  !important;
+    color: white !important;
+  }
+  
+  .button:active {
+    transform: scale(0.98);
+    background-color: #00585e !important;
+    border-color: #00585e  !important;
+    color: white !important;
+  }
+  .add-button{
+    background-color: #007e87b2;
+    border-color: #007E87;
+    color: white !important;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    width: 20%;
+    max-width: 800px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .add-button:hover {
+    background-color: #00585e !important;
+    border-color: #00585e  !important;
+    color: white !important;
+  }
+  
+  .retutnButton {
+    background-color: #f0f0f0 !important;
+    border: 1px solid #727272 !important;
+    border-radius: 6px !important;
+    color: rgba(0, 0, 0, 0.88) !important;
+    margin: 10px;
+  }
+  
+  .retutnButton:hover {
+    background-color: #727272 !important;
+    color: white !important;
+  }
+  
+  .repair-card {
+    position: relative;
+}
+
+.delete-icon {
+    position: absolute;
+    top:8px;
+    right:8px;
+    cursor: pointer;
+    color: rgb(155, 155, 155);
+}
+.custom-checkbox .ant-checkbox-checked .ant-checkbox-inner {
+    background-color: #007e87b2 !important; /* Change this to your desired color */
+    border-color: #007e87b2 !important; /* Change this to your desired color */
+}
+
+.custom-checkbox .ant-checkbox-checked::after {
+    border-color: #007e87b2 !important; /* Change this to your desired color */
+}
+
+.custom-checkbox:hover .ant-checkbox-inner {
+    border-color: #007e87b2 !important; /* Change this to your desired color */
+}

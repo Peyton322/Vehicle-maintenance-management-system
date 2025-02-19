@@ -1,30 +1,40 @@
 export const customerData = [
     {
-      name: '陳大明',
-      phone: '09-12345678',
+      name: '陳政瑋',
+      phone: '0933182664',
       carInfo: {
-        plate: 'ABC-123',
-        model: 'Toyota Camry 2022'
+        plate: 'AZF-172',
+        model: 'ACURA'
       },
       lastMaintenance: '2024-10-30',
       status: '處理中'
     },
     {
-      name: '林小明',
-      phone: '09-12345678',
+      name: '康雅惠',
+      phone: '0971923039',
       carInfo: {
-        plate: 'XYZ-789',
-        model: 'Honda Civic 2023'
+        plate: 'UEI-910',
+        model: 'AUDI'
       },
       lastMaintenance: '2024-12-01',
       status: '已完成'
     },
     {
-      name: '王小美',
-      phone: '09-87654321',
+      name: '林玉芳',
+      phone: '0931230551',
       carInfo: {
-        plate: 'DEF-456',
-        model: 'Tesla Model 3 2023'
+        plate: 'APW-0322',
+        model: 'TOYOTA'
+      },
+      lastMaintenance: '2024-11-15',
+      status: '待處理'
+    },
+    {
+      name: '陳昌相',
+      phone: '0955636056',
+      carInfo: {
+        plate: 'QUI-9432',
+        model: 'TOYOTA'
       },
       lastMaintenance: '2024-11-15',
       status: '待處理'

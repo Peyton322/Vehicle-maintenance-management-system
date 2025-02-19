@@ -1,10 +1,10 @@
 export const customersHistory = {
-    'ABC-123': {
+    'AZF-172': {
       carInfo: {
-        plate: 'ABC-123',
-        model: 'Toyota Camry 2022',
+        plate: 'AZF-172',
+        model: 'ACURA',
         mileage: '42,000 km',
-        owner: '陳大明',
+        owner: '陳政瑋',
         status: '處理中'
       },
       maintenanceStats: {
@@ -30,12 +30,12 @@ export const customersHistory = {
         }
       ]
     },
-    'XYZ-789': {
+    'UEI-910': {
       carInfo: {
-        plate: 'XYZ-789',
-        model: 'Honda Civic 2023',
+        plate: 'UEI-910',
+        model: 'AUDI',
         mileage: '15,000 km',
-        owner: '林小明',
+        owner: '康雅惠',
         status: '已完成'
       },
       maintenanceStats: {
@@ -61,12 +61,12 @@ export const customersHistory = {
         }
       ]
     },
-    'DEF-456': {
+    'APW-0322': {
       carInfo: {
-        plate: 'DEF-456',
-        model: 'Tesla Model 3 2023',
+        plate: 'APW-0322',
+        model: 'TOYOTA',
         mileage: '30,000 km',
-        owner: '王小美',
+        owner: '林玉芳',
         status: '待處理'
       },
       maintenanceStats: {

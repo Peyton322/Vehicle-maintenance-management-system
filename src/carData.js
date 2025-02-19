@@ -1,7 +1,7 @@
 export const carsData = {
-    'ABC-123': {
-      plateNumber: 'ABC-123',
-      model: 'Toyota Camry 2022',
+    'AZF-172': {
+      plateNumber: 'AZF-172',
+      model: 'ACURA',
       mileage: '45,000km',
       maintenanceAlert: {
         message: '煞車片磨損嚴重，建議在 500km 內進行更換',
@@ -26,9 +26,9 @@ export const carsData = {
         { month: '6月', value: 65 }
       ]
     },
-    'XYZ-789': {
-      plateNumber: 'XYZ-789',
-      model: 'Honda Civic 2023',
+    'UEI-910': {
+      plateNumber: 'UEI-910',
+      model: 'AUDI',
       mileage: '15,000km',
       maintenanceAlert: {
         message: '機油需要更換，建議在下次保養時進行',
@@ -52,9 +52,9 @@ export const carsData = {
         { month: '6月', value: 75 }
       ]
     },
-    'DEF-456': {
-      plateNumber: 'DEF-456',
-      model: 'Tesla Model 3 2023',
+    'APW-0322': {
+      plateNumber: 'APW-0322',
+      model: 'TOYOTA',
       mileage: '30,000km',
       maintenanceAlert: {
         message: '輪胎磨損不均勻，建議進行輪胎調換',

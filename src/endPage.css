@@ -1,0 +1,38 @@
+.end-page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f2f5;
+}
+
+.confirmation-box {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.confirmation-box h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.confirmation-box p {
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+.home-button {
+    background-color: #007e87b2;
+    border-color: #007E87;
+    color: white;
+    border-radius: 10px;
+}
+
+.home-button:hover {
+    background-color: #00585e !important;
+    border-color: #00585e  !important;
+    color: white !important;
+}

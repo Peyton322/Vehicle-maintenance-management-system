@@ -1,16 +1,23 @@
 import React from 'react';
 import { Card, Progress, Button } from 'antd';
-import { useParams, useLocation ,useNavigate} from 'react-router-dom';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 
 import { carsData } from './carData';
 import './carStatus.css';
-
+import './repairConfirmation.js'
 const CarStatus = () => {
     const { plateNumber } = useParams();
     const location = useLocation();
     const description = new URLSearchParams(location.search).get('description');
     const navigate = useNavigate();
-
+    const handleGoClick = () => {
+        /*用 if 檢查車牌號碼是否存在（不是空值）*/
+        if (plateNumber.trim()) { /*trim() 用來去除字串前後的空格*/
+          /*輸入使用者故障狀況描述*/
+          const encodedDescription = encodeURIComponent(description.trim()); /*encodeURIComponent() 將文字轉換成 URL 安全的格式*/
+          navigate(`/repairConfirmation/${plateNumber}?description=${encodedDescription}`); /*跳轉到 car-status 頁面 同時傳入兩個參數：plateNumber（作為路徑參數）encodedDescription（作為查詢參數）*/
+        }
+      };
     const carData = carsData[plateNumber] || {
         plateNumber: '未找到車輛',
         model: '未知',
@@ -123,9 +130,10 @@ const CarStatus = () => {
                         ))}
                     </div>
                 </div>
-                <Button className='button'>
+                <Button className='button' onClick={handleGoClick}>
                     下一步
                 </Button>
+
             </div>
         </div>
     );
