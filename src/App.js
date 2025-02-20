@@ -12,7 +12,7 @@ const App = () => {
   };
   const onFinish = (values) => {
     // Check if credentials match
-    if (values.email === 'C111156118@nkust.edu.tw' && values.password === '12345678') {
+    if (values.email === 'C111156118@nkust.edu.tw' && values.password === '1234') {
       message.success('Login successful!');
       navigate('/query');
     } else {

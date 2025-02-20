@@ -73,7 +73,11 @@ const CustomerHistory = () => {
           </div>
           <div>
             <h4>車主姓名</h4>
-            <p>{customerDetail.carInfo.owner}</p>
+            <p>
+              {customerDetail.carInfo.owner.length > 1
+                ? customerDetail.carInfo.owner[0] + 'O' + customerDetail.carInfo.owner.slice(2)
+                : customerDetail.carInfo.owner}
+            </p>
           </div>
           <div>
             <h4>目前狀況</h4>
@@ -93,9 +97,9 @@ const CustomerHistory = () => {
         </Card>
       </div>
 
-      <Table 
-        columns={columns} 
-        dataSource={customerDetail.maintenanceHistory} 
+      <Table
+        columns={columns}
+        dataSource={customerDetail.maintenanceHistory}
         scroll={{ x: true }}
       />
     </div>

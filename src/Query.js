@@ -118,22 +118,27 @@ const Query = () => {
 
             <div className="customer-list">
               <h2>所有客戶資料</h2>
-              {filteredCustomers.map((customer, index) => (
-                <div key={index} className="customer-card">
-                  <div className="customer-name">{customer.name}</div>
-                  <div className="customer-phone">📞 {customer.phone}</div>
-                  <div className="customer-car">
-                    🚗 {customer.carInfo.plate} {customer.carInfo.model}
+              {filteredCustomers.map((customer, index) => {
+                const anonymizedName = customer.name.length > 1
+                  ? customer.name[0] + 'O' + customer.name.slice(2)
+                  : customer.name;
+                return (
+                  <div key={index} className="customer-card">
+                    <div className="customer-name">{anonymizedName}</div>
+                    <div className="customer-phone">📞 {customer.phone}</div>
+                    <div className="customer-car">
+                      🚗 {customer.carInfo.plate} {customer.carInfo.model}
+                    </div>
+                    <div className="maintenance-info">
+                      <div>最近維修：{customer.lastMaintenance}</div>
+                      <div>狀態：{customer.status}</div>
+                    </div>
+                    <Button className="detail-button"
+                      onClick={() => navigate(`/customer-history/${customer.carInfo.plate}`)}>
+                      查看歷史資料</Button>
                   </div>
-                  <div className="maintenance-info">
-                    <div>最近維修：{customer.lastMaintenance}</div>
-                    <div>狀態：{customer.status}</div>
-                  </div>
-                  <Button className="detail-button"
-                    onClick={() => navigate(`/customer-history/${customer.carInfo.plate}`)}>
-                    查看歷史資料</Button>
-                </div>
-              ))}
+                );
+              })}
               {filteredCustomers.length === 0 && (
                 <div style={{ textAlign: 'center', padding: '20px' }}>
                   未找到符合條件的客戶資料
