@@ -6,7 +6,7 @@ export const customerData = [
         plate: 'AZF-172',
         model: 'ACURA'
       },
-      lastMaintenance: '2024-10-30',
+      lastMaintenance: '2024-07-13',
       status: '處理中'
     },
     {
@@ -16,7 +16,7 @@ export const customerData = [
         plate: 'UEI-910',
         model: 'AUDI'
       },
-      lastMaintenance: '2024-12-01',
+      lastMaintenance: '2024-06-13',
       status: '已完成'
     },
     {
@@ -26,7 +26,7 @@ export const customerData = [
         plate: 'APW-0322',
         model: 'TOYOTA'
       },
-      lastMaintenance: '2024-11-15',
+      lastMaintenance: '2024-08-26',
       status: '待處理'
     },
     {

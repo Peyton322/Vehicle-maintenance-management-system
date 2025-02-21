@@ -2,7 +2,7 @@ export const carsData = {
     'AZF-172': {
       plateNumber: 'AZF-172',
       model: 'ACURA',
-      mileage: '45,000km',
+      mileage: '91,244 miles',
       maintenanceAlert: {
         message: '煞車片磨損嚴重，建議在 500km 內進行更換',
         type: 'warning'
@@ -29,7 +29,7 @@ export const carsData = {
     'UEI-910': {
       plateNumber: 'UEI-910',
       model: 'AUDI',
-      mileage: '15,000km',
+      mileage: '275,398 miles',
       maintenanceAlert: {
         message: '機油需要更換，建議在下次保養時進行',
         type: 'warning'
@@ -53,7 +53,7 @@ export const carsData = {
       ]
     },
     'APW-0322': {
-      plateNumber: 'APW-0322',
+      plateNumber: '358,485 miles',
       model: 'TOYOTA',
       mileage: '30,000km',
       maintenanceAlert: {
