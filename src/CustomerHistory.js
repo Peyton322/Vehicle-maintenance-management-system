@@ -88,7 +88,7 @@ const CustomerHistory = () => {
 
       <div className="stats-grid">
         <Card className="info-card">
-          <h4>年度維修次數</h4>
+          <h4>維修次數</h4>
           <p className="stats-number">{customerDetail.maintenanceStats.yearlyCount}次</p>
         </Card>
         <Card className="info-card">
@@ -101,7 +101,9 @@ const CustomerHistory = () => {
         columns={columns}
         dataSource={customerDetail.maintenanceHistory}
         scroll={{ x: true }}
+        pagination={{ pageSize: 8 }} // 每頁顯示 5 筆資料
       />
+
     </div>
   );
 };

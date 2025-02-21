@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Progress, Button } from 'antd';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
-
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 import { carsData } from './carData';
 import './carStatus.css';
 import './repairConfirmation.js'
@@ -80,7 +80,7 @@ const CarStatus = () => {
                             <div key={index} className="mb-4">
                                 <div className="progress-label">
                                     <span>{item.name}</span>
-                                    <span>預估剩餘壽命: {item.remaining}</span>
+                                    <span>預估剩餘壽命大約 : {item.remaining}</span>
                                 </div>
                                 <Progress percent={item.percentage} />
                             </div>
@@ -115,20 +115,13 @@ const CarStatus = () => {
                 {/* 整體健康趨勢 */}
                 <div className="status-card">
                     <h2 className="status-title">整體健康趨勢</h2>
-                    <div className="health-trend">
-                        {carData.healthTrend.map((point, index) => (
-                            <div key={index} className="trend-bar">
-                                <div
-                                    className="bar"
-                                    style={{
-                                        height: `${point.value * 2}px`,
-                                        backgroundColor: point.value < 70 ? '#DC2626' : '#007E87'
-                                    }}
-                                />
-                                <div className="bar-label">{point.month}</div>
-                            </div>
-                        ))}
-                    </div>
+                    <LineChart width={700} height={300} data={carData.healthTrend}>
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="month" />
+                        <YAxis domain={[0, 100]} />
+                        <Tooltip />
+                        <Line type="monotone" dataKey="value" stroke="#007E87" activeDot={{ r: 8 }} />
+                    </LineChart>
                 </div>
                 <Button className='button' onClick={handleGoClick}>
                     下一步

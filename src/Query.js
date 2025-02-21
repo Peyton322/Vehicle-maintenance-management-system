@@ -10,25 +10,27 @@ const Query = () => {
   const [searchPhone, setSearchPhone] = useState('');
   const [searchStatus, setSearchStatus] = useState('');
 
+  // 維修-車牌查詢
+  const [plateNumber, setPlateNumber] = useState('');
+  const [description, setDescription] = useState('');
+  const navigate = useNavigate();
+
   //處理搜尋
   const handleSearch = (values) => {
     setSearchName(values.name || '');
     setSearchPhone(values.phone || '');
     setSearchStatus(values.status || '');
+    setPlateNumber(values.plate || '');
   };
 
   // 過濾邏輯
   const filteredCustomers = customerData.filter((customer) => {
     const nameMatch = searchName ? customer.name.includes(searchName) : true;
     const phoneMatch = searchPhone ? customer.phone.includes(searchPhone) : true;
+    const plateMatch= plateNumber ? customer.carInfo.plate.includes(plateNumber) : true;
     const statusMatch = searchStatus ? customer.status === searchStatus : true;
-    return nameMatch && phoneMatch && statusMatch;
+    return nameMatch && phoneMatch && statusMatch && plateMatch;
   });
-
-  // 維修-車牌查詢
-  const [plateNumber, setPlateNumber] = useState('');
-  const [description, setDescription] = useState('');
-  const navigate = useNavigate();
 
   const handleGoClick = () => {
     /*用 if 檢查車牌號碼是否存在（不是空值）*/
@@ -82,6 +84,14 @@ const Query = () => {
               onFinish={handleSearch}
             >
               <Form.Item
+                label="車牌查詢"
+                name="plate"
+              >
+                <Input placeholder="輸入車牌號碼..." />
+              </Form.Item>
+
+
+              <Form.Item
                 label="姓名查詢"
                 name="name"
               >
@@ -102,9 +112,9 @@ const Query = () => {
                 <Select
                   placeholder="狀態..."
                   options={[
-                    { value: '待處理', label: '待處理' },
-                    { value: '處理中', label: '處理中' },
-                    { value: '已完成', label: '已完成' }
+                    { value: '優良', label: '優良' },
+                    { value: '良好', label: '良好' },
+                    { value: '不佳', label: '不佳' }
                   ]}
                 />
               </Form.Item>
