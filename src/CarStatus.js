@@ -119,7 +119,7 @@ const CarStatus = () => {
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="month" />
                         <YAxis domain={[0, 100]} />
-                        <Tooltip />
+                        <Tooltip formatter={(value, name) => [value, '狀態']} />
                         <Line type="monotone" dataKey="value" stroke="#007E87" activeDot={{ r: 8 }} />
                     </LineChart>
                 </div>
