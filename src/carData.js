@@ -101,7 +101,7 @@ export const carsData = {
       { month: '2024-12', value: 85 },
       { month: '2025-01', value: 83 },
       { month: '2025-02', value: 80 },
-      { month: '2025-03', value: 78 }
+      { month: '2025-03', value: 78 },
     ]
   }
 };
