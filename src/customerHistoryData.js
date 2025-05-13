@@ -1,3 +1,6 @@
+//優良：健康度 80% 以上
+// 良好：健康度 61% 至 80%
+// 不佳：健康度低於 60%
 export const customersHistory = {
   'AZF-172': {
     carInfo: {
@@ -35,7 +38,7 @@ export const customersHistory = {
       model: 'Audi A6 2021',
       mileage: '443,000 km',
       owner: '康雅惠',
-      status: '優良',
+      status: '良好',
       carID: '0171YQ'
     },
     maintenanceStats: {
@@ -92,7 +95,7 @@ export const customersHistory = {
       model: "Toyota RAV4 2021",
       mileage: "78,000 km",
       owner: "林佳慧",
-      status: "不佳",
+      status: "良好",
       carID: "0357XZ"
     },
     maintenanceStats: {
@@ -161,7 +164,7 @@ export const customersHistory = {
       plate: "XZN-7831",
       model: "Mazda 6 2020",
       owner: "李佩蓉",
-      status: "優良",
+      status: "良好",
       carID: "0231RF"
     },
     maintenanceStats: {
@@ -183,7 +186,7 @@ export const customersHistory = {
       plate: "JLP-4568",
       model: "Ford Kuga 2023",
       owner: "黃志誠",
-      status: "不佳",
+      status: "良好",
       carID: "0527KL"
     },
     maintenanceStats: {
@@ -229,7 +232,7 @@ export const customersHistory = {
       plate: "GBC-4732",
       model: "BMW X5 2022",
       owner: "吳宗翰",
-      status: "不佳",
+      status: "良好",
       carID: "0385WL"
     },
     maintenanceStats: {
@@ -280,7 +283,7 @@ export const customersHistory = {
       plate: "VBN-6352",
       model: "Mercedes-Benz GLC 2023",
       owner: "許威廷",
-      status: "不佳",
+      status: "良好",
       carID: "0429KM"
     },
     maintenanceStats: {

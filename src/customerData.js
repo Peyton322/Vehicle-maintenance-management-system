@@ -7,7 +7,7 @@ export const customerData = [
       model: 'Audi A6 2021'
     },
     lastMaintenance: '2025-01-12',
-    status: '優良'
+    status: '良好'
   },
   {
     name: '陳政瑋',
@@ -37,7 +37,7 @@ export const customerData = [
       model: "Toyota RAV4 2021"
     },
     lastMaintenance: "2024-09-10",
-    status: "不佳"
+    status: "良好"
   },
   {
     name: "陳彥廷",
@@ -67,7 +67,7 @@ export const customerData = [
       model: "Mazda 6 2020"
     },
     lastMaintenance: "2024-07-25",
-    status: "優良"
+    status: "良好"
   },
   {
     name: "黃志誠",
@@ -77,7 +77,7 @@ export const customerData = [
       model: "Ford Kuga 2023"
     },
     lastMaintenance: "2024-11-02",
-    status: "不佳"
+    status: "良好"
   },
   {
     name: "周欣怡",
@@ -97,7 +97,7 @@ export const customerData = [
       model: "BMW X5 2022"
     },
     lastMaintenance: "2024-05-12",
-    status: "不佳"
+    status: "良好"
   },
   {
     name: "楊淑芬",
@@ -117,7 +117,7 @@ export const customerData = [
       model: "Mercedes-Benz GLC 2023"
     },
     lastMaintenance: "2024-10-08",
-    status: "不佳"
+    status: "良好"
   },
   {
     name: "曾筱婷",
