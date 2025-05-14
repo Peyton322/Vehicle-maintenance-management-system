@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import Footer from './Footer.js';
 import { Card, Checkbox, Button, Input } from 'antd';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { carsData } from './carData';
 import './repairConfirmation.css';
-import { CloseOutlined,CarOutlined, QuestionCircleOutlined, PlusCircleOutlined  } from '@ant-design/icons';
+import { CloseOutlined, CarOutlined, QuestionCircleOutlined, PlusCircleOutlined } from '@ant-design/icons';
 
 
 // ...existing code...
@@ -52,9 +53,20 @@ const RepairConfirmation = () => {
         setCustomItems(updatedCustomItems);
     };
     return (
-        <div><Button className='retutnButton' onClick={() => navigate(-1)} >
-            返回
-        </Button>
+
+        <div>
+            <div>
+                <div style={{
+                    width: '100%',
+                    height: '50px',
+                    backgroundColor: '#007E87', // 您可以自定義顏色，這是一個藍色
+                    marginBottom: '15px',
+                }}>
+                </div>
+            </div>
+            <Button className='retutnButton' onClick={() => navigate(-1)} >
+                返回
+            </Button>
             <div className="repair-confirmation-container">
 
                 <div className='status-card'>
@@ -86,7 +98,7 @@ const RepairConfirmation = () => {
                             <Card key={index} className="repair-card">
                                 <Checkbox className="custom-checkbox" checked={item.selected} onChange={() => handleCheckboxChange(index, 'custom')}>
                                     {item.item}
-                                </Checkbox> 
+                                </Checkbox>
                                 <span className="repair-cost">NT${item.cost}</span>
                                 <CloseOutlined onClick={() => handleDeleteItem(index)} className="delete-icon" />
                             </Card>
@@ -102,7 +114,10 @@ const RepairConfirmation = () => {
                 </Card>
 
                 <Button className="button" onClick={() => navigate('/endPage')}>確認維修項目</Button>
+
             </div>
+            <Footer />
+
         </div>
     );
 };

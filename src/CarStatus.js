@@ -3,6 +3,7 @@ import { Card, Progress, Button } from 'antd';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 import { carsData } from './carData';
+import Footer from './Footer.js';
 import './carStatus.css';
 import './repairConfirmation.js'
 const CarStatus = () => {
@@ -13,11 +14,11 @@ const CarStatus = () => {
     const handleGoClick = () => {
         /*用 if 檢查車牌號碼是否存在（不是空值）*/
         if (plateNumber.trim()) { /*trim() 用來去除字串前後的空格*/
-          /*輸入使用者故障狀況描述*/
-          const encodedDescription = encodeURIComponent(description.trim()); /*encodeURIComponent() 將文字轉換成 URL 安全的格式*/
-          navigate(`/repairConfirmation/${plateNumber}?description=${encodedDescription}`); /*跳轉到 car-status 頁面 同時傳入兩個參數：plateNumber（作為路徑參數）encodedDescription（作為查詢參數）*/
+            /*輸入使用者故障狀況描述*/
+            const encodedDescription = encodeURIComponent(description.trim()); /*encodeURIComponent() 將文字轉換成 URL 安全的格式*/
+            navigate(`/repairConfirmation/${plateNumber}?description=${encodedDescription}`); /*跳轉到 car-status 頁面 同時傳入兩個參數：plateNumber（作為路徑參數）encodedDescription（作為查詢參數）*/
         }
-      };
+    };
     const carData = carsData[plateNumber] || {
         plateNumber: '未找到車輛',
         model: '未知',
@@ -42,6 +43,15 @@ const CarStatus = () => {
 
     return (
         <div>
+            <div>
+                <div style={{
+                    width: '100%',
+                    height: '50px',
+                    backgroundColor: '#007E87', // 您可以自定義顏色，這是一個藍色
+                    marginBottom: '15px',
+                }}>
+                </div>
+            </div>
             <Button className='retutnButton' onClick={() => navigate(-1)} >
                 返回
             </Button>
@@ -128,6 +138,8 @@ const CarStatus = () => {
                 </Button>
 
             </div>
+            <Footer />
+
         </div>
     );
 };

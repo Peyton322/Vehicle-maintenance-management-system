@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Input, Select, Form } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { customerData } from './customerData';
+import { UpOutlined } from '@ant-design/icons'; // 引入上箭頭圖標
 import './query.css'
 const Query = () => {
   const [activeQuery, setActiveQuery] = useState('customer'); // 初始值設為 'customer'
@@ -9,7 +10,7 @@ const Query = () => {
   const [searchName, setSearchName] = useState(''); // 宣告一個新的 state 變數，我們稱作為「searchName」。
   const [searchPhone, setSearchPhone] = useState('');
   const [searchStatus, setSearchStatus] = useState('');
-
+  const [showTopButton, setShowTopButton] = useState(false); // 控制按鈕顯示隱藏
   // 維修-車牌查詢
   const [plateNumber, setPlateNumber] = useState('');
   const [description, setDescription] = useState('');
@@ -27,7 +28,7 @@ const Query = () => {
   const filteredCustomers = customerData.filter((customer) => {
     const nameMatch = searchName ? customer.name.includes(searchName) : true;
     const phoneMatch = searchPhone ? customer.phone.includes(searchPhone) : true;
-    const plateMatch= plateNumber ? customer.carInfo.plate.includes(plateNumber) : true;
+    const plateMatch = plateNumber ? customer.carInfo.plate.includes(plateNumber) : true;
     const statusMatch = searchStatus ? customer.status === searchStatus : true;
     return nameMatch && phoneMatch && statusMatch && plateMatch;
   });
@@ -40,8 +41,44 @@ const Query = () => {
       navigate(`/car-status/${plateNumber}?description=${encodedDescription}`); /*跳轉到 car-status 頁面 同時傳入兩個參數：plateNumber（作為路徑參數）encodedDescription（作為查詢參數）*/
     }
   };
+  // 監聽滾動事件，決定是否顯示返回頂部按鈕
+  useEffect(() => {
+    const handleScroll = () => {
+      // 當頁面向下滾動超過 300px 時顯示按鈕
+      if (window.scrollY > 300) {
+        setShowTopButton(true);
+      } else {
+        setShowTopButton(false);
+      }
+    };
+
+    // 添加滾動事件監聽器
+    window.addEventListener('scroll', handleScroll);
+
+    // 清理函數，移除事件監聽器
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  // 滾動回頂部的函數
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' // 平滑滾動效果
+    });
+  };
   return (
     <div>
+      <div>
+        <div style={{
+          width: '100%',
+          height: '50px',
+          backgroundColor: '#007E87', // 您可以自定義顏色，這是一個藍色
+          marginBottom: '15px',
+        }}>
+        </div>
+      </div>
       <div className='title'>
         <img
           src={require("./images/front-car.png")}
@@ -159,7 +196,12 @@ const Query = () => {
 
         ) : (
           // Maintenance Query Form
-          <Form layout="vertical">
+          <Form
+            layout="vertical"
+            style={{
+              paddingBottom: '10px',  // 增加底部間距
+              marginBottom: '20px'     // 額外的底部邊距
+            }}>
             <Form.Item label="查詢車牌號碼">
               <Input
                 placeholder="license plate number"
@@ -189,6 +231,173 @@ const Query = () => {
             </Form.Item>
           </Form>
         )}
+      </div>
+      {/* 返回頂部按鈕 */}
+      {showTopButton && (
+        <div
+          onClick={scrollToTop}
+          style={{
+            position: 'fixed',
+            bottom: '90px', // 位於 footer 上方
+            right: '20px',
+            width: '40px',
+            height: '40px',
+            borderRadius: '50%',
+            backgroundColor: '#007E87',
+            color: 'white',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+            boxShadow: '0 2px 10px rgba(0,0,0,0.2)',
+            zIndex: 10,  // 確保在其他元素上方
+            transition: 'all 0.3s ease',
+          }}
+          onMouseOver={(e) => {
+            e.currentTarget.style.backgroundColor = '#00989F';
+            e.currentTarget.style.transform = 'translateY(-3px)';
+          }}
+          onMouseOut={(e) => {
+            e.currentTarget.style.backgroundColor = '#007E87';
+            e.currentTarget.style.transform = 'translateY(0)';
+          }}
+        >
+          <UpOutlined style={{ fontSize: '18px' }} />
+        </div>
+      )}
+
+      <div style={{
+        position: 'fixed', // 改為 fixed，確保滾動時背景跟隨
+        bottom: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        backgroundImage: `url(${require('./images/car.jpg')})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center bottom',
+        backgroundRepeat: 'no-repeat',
+        zIndex: -1 // 確保在內容下方
+      }}>
+        {/* 漸層遮罩 */}
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          background: 'linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0.95) 45%, rgba(255,255,255,0.7) 65%, rgba(198, 190, 190, 0.5) 90%)',
+        }}></div>
+      </div>
+      {/* 馬路樣式的 footer */}
+      <div style={{
+        marginTop: 'auto', // 推到底部
+        width: '100%',
+      }}>
+        <div style={{
+          width: '100%',
+          height: '50px',
+          backgroundColor: '#666666', // 瀝青路面的灰色
+          position: 'relative', // 為了定位黃色虛線
+          overflow: 'hidden', // 確保內容不溢出
+        }}>
+          {/* 馬路中央的黃色虛線 */}
+          <div style={{
+            position: 'absolute',
+            top: '50%',
+            left: 0,
+            width: '100%',
+            height: '4px', // 虛線寬度
+            transform: 'translateY(-50%)', // 垂直置中
+            backgroundImage: 'linear-gradient(to right, #FFCC00 50%, transparent 50%)', // 黃色虛線效果
+            backgroundSize: '40px 100%', // 控制虛線長度
+            backgroundRepeat: 'repeat-x',
+          }}></div>
+
+          {/* 添加一些路面紋理效果，讓看起來更像馬路 */}
+          <div style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            opacity: 0.05, // 輕微的紋理
+            background: 'repeating-linear-gradient(45deg, #333333, #333333 2px, transparent 2px, transparent 4px)' // 柏油路面的細微紋理
+          }}></div>
+
+          {/* 上方車道固定車輛 - 水平翻轉使其朝向相反方向 */}
+          <div style={{
+            position: 'absolute',
+            top: '25%',
+            left: '20%',
+            transform: 'translateY(-50%) scaleX(-1)', // scaleX(-1) 水平翻轉
+            zIndex: 1
+          }}>
+            <span role="img" aria-label="car" style={{ fontSize: '20px' }}>🚗</span>
+          </div>
+
+          <div style={{
+            position: 'absolute',
+            top: '25%',
+            left: '50%',
+            transform: 'translateY(-50%) scaleX(-1)', // scaleX(-1) 水平翻轉
+            zIndex: 1
+          }}>
+            <span role="img" aria-label="taxi" style={{ fontSize: '20px' }}>🚕</span>
+          </div>
+
+          <div style={{
+            position: 'absolute',
+            top: '25%',
+            left: '80%',
+            transform: 'translateY(-50%) scaleX(-1)', // scaleX(-1) 水平翻轉
+            zIndex: 1
+          }}>
+            <span role="img" aria-label="police car" style={{ fontSize: '20px' }}>🚓</span>
+          </div>
+
+          {/* 下方車道固定車輛 */}
+          <div style={{
+            position: 'absolute',
+            top: '75%',
+            left: '10%',
+            transform: 'translateY(-50%)',
+            zIndex: 1
+          }}>
+            <span role="img" aria-label="truck" style={{ fontSize: '20px' }}>🚚</span>
+          </div>
+
+          <div style={{
+            position: 'absolute',
+            top: '75%',
+            left: '40%',
+            transform: 'translateY(-50%)',
+            zIndex: 1
+          }}>
+            <span role="img" aria-label="ambulance" style={{ fontSize: '20px' }}>🚑</span>
+          </div>
+
+          <div style={{
+            position: 'absolute',
+            top: '75%',
+            left: '70%',
+            transform: 'translateY(-50%)',
+            zIndex: 1
+          }}>
+            <span role="img" aria-label="sport car" style={{ fontSize: '20px' }}>🏎️</span>
+          </div>
+        </div>
+        <div style={{
+          width: '100%',
+          height: '30px', // 增加高度，讓文字有更好的顯示空間
+          backgroundColor: '#666666',
+          display: 'flex',
+          alignItems: 'center', // 垂直居中
+          justifyContent: 'center', // 水平居中
+          color: '#ffffff', // 文字設為白色，增加可讀性
+          fontSize: '12px', // 設定合適的字體大小
+        }}>
+          <p style={{ margin: 0, padding: 0 }}>© 2025 車輛維修系統</p>
+        </div>
       </div>
     </div>
   );
