@@ -1,14 +1,15 @@
 {
   "files": {
-    "main.css": "/Vehicle-maintenance-management-system/static/css/main.bbbafb44.css",
-    "main.js": "/Vehicle-maintenance-management-system/static/js/main.0caa8c13.js",
+    "main.css": "/Vehicle-maintenance-management-system/static/css/main.7eca4548.css",
+    "main.js": "/Vehicle-maintenance-management-system/static/js/main.3ad857e0.js",
+    "static/media/car.jpg": "/Vehicle-maintenance-management-system/static/media/car.8676fbb3ab462fc86080.jpg",
     "static/media/maintenance.png": "/Vehicle-maintenance-management-system/static/media/maintenance.3ac526953d75b25ba17c.png",
     "index.html": "/Vehicle-maintenance-management-system/index.html",
-    "main.bbbafb44.css.map": "/Vehicle-maintenance-management-system/static/css/main.bbbafb44.css.map",
-    "main.0caa8c13.js.map": "/Vehicle-maintenance-management-system/static/js/main.0caa8c13.js.map"
+    "main.7eca4548.css.map": "/Vehicle-maintenance-management-system/static/css/main.7eca4548.css.map",
+    "main.3ad857e0.js.map": "/Vehicle-maintenance-management-system/static/js/main.3ad857e0.js.map"
   },
   "entrypoints": [
-    "static/css/main.bbbafb44.css",
-    "static/js/main.0caa8c13.js"
+    "static/css/main.7eca4548.css",
+    "static/js/main.3ad857e0.js"
   ]
 }
