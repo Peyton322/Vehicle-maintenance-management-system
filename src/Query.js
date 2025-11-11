@@ -197,6 +197,7 @@ const Query = () => {
 
         ) : (
           // Maintenance Query Form
+          <div style={{ minHeight: '64.6vh' }}>
           <Form
             layout="vertical"
            >
@@ -228,6 +229,7 @@ const Query = () => {
               </Button>
             </Form.Item>
           </Form>
+          </div>
         )}
       </div>
       {/* 返回頂部按鈕 */}

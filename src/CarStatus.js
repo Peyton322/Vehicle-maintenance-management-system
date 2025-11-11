@@ -69,10 +69,6 @@ const CarStatus = () => {
                             <div className="info-label">車型</div>
                             <div className="info-value">{carData.model}</div>
                         </div>
-                        <div>
-                            <div className="info-label">里程數</div>
-                            <div className="info-value">{carData.mileage}</div>
-                        </div>
                     </div>
                 </div>
 
@@ -84,13 +80,12 @@ const CarStatus = () => {
 
                 {/* 壽命預測 */}
                 <div className="status-card">
-                    <h2 className="status-title">壽命預測</h2>
+                    <h2 className="status-title">零件故障率預測</h2>
                     <div className="space-y-4">
                         {carData.lifePrediction.map((item, index) => (
                             <div key={index} className="mb-4">
                                 <div className="progress-label">
                                     <span>{item.name}</span>
-                                    <span>預估剩餘壽命大約 : {item.remaining}</span>
                                 </div>
                                 <Progress percent={item.percentage} />
                             </div>

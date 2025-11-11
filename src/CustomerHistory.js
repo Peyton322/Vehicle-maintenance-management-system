@@ -44,11 +44,6 @@ const CustomerHistory = () => {
       key: 'items',
     },
     {
-      title: '里程數',
-      dataIndex: 'mileage',
-      key: 'mileage',
-    },
-    {
       title: '維修費用',
       dataIndex: 'cost',
       key: 'cost',
@@ -78,10 +73,6 @@ const CustomerHistory = () => {
 
         <Card title={`🚗${customerDetail.carInfo.plate}   ${customerDetail.carInfo.model}`} className="info-card">
           <div className="info-grid">
-            <div>
-              <h4>總里程數</h4>
-              <p>{customerDetail.carInfo.mileage}</p>
-            </div>
             <div>
               <h4>車主姓名</h4>
               <p>

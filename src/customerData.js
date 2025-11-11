@@ -10,16 +10,6 @@ export const customerData = [
     status: '良好'
   },
   {
-    name: '陳政瑋',
-    phone: '0933182664',
-    carInfo: {
-      plate: 'AZF-172',
-      model: 'Acura RDX 2020'
-    },
-    lastMaintenance: '2025-1-10',
-    status: '優良'
-  },
-  {
     name: '林玉芳',
     phone: '0931230551',
     carInfo: {
@@ -48,6 +38,16 @@ export const customerData = [
     },
     lastMaintenance: "2024-10-05",
     status: "良好"
+  },
+   {
+    name: '陳政瑋',
+    phone: '0933182664',
+    carInfo: {
+      plate: 'BSU-1151',
+      model: 'Nissan  Altima 2001'
+    },
+    lastMaintenance: '2025-1-10',
+    status: '優良'
   },
   {
     name: "張書豪",

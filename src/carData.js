@@ -1,38 +1,39 @@
 export const carsData = {
-  'AZF-172': {
-    plateNumber: 'AZF-172',
-    model: 'Acura RDX 2020',
+  'BSU-1151': {
+    plateNumber: 'BSU-1151',
+    model: 'Nissan  Altima 2001',
     mileage: '146,885 km',
     maintenanceAlert: {
-      message: '煞車片需更換，請盡速安排保養',
+      message: '無',
       type: 'warning'
     },
     lifePrediction: [
-      { name: '煞車片', remaining: '800 km', percentage: 10 },
-      { name: '機油', remaining: '4,000 km', percentage: 65 },
-      { name: '輪胎', remaining: '12,800 km', percentage: 83 }
+      { name: '機油', remaining: '12,800 km', percentage: 16.2 },
+      { name: '空氣濾芯', remaining: '4,000 km', percentage: 14.4 },
+      { name: '平衡桿連桿', remaining: '800 km', percentage: 12.6 },
+      { name: '差速器油', remaining: '800 km', percentage: 10.3 },
+      { name: '冷卻液', remaining: '800 km', percentage: 8.5 },
     ],
     maintenanceItems: [
-      { level: '緊急', item: '更換煞車片', cost: 3500 },
-      { level: '中等', item: '更換機油', cost: 1200 },
-      { level: '例行', item: '檢查輪胎胎壓', cost: 100 }
+      { level: '緊急', item: '機油', cost: 1500 },
+      { level: '中等', item: '空氣濾芯', cost: 600 },
+      { level: '例行', item: '平衡桿連桿', cost: 5000 }
     ],
-    // Health trend reflects that after the July 2024 maintenance (故障維修) the value jumps up,
-    // while in months without maintenance the trend declines.
+    // Health trend based on maintenance history - increases after maintenance, decreases over time
     healthTrend: [
-      { month: '2024-03', value: 80 },
-      { month: '2024-04', value: 78 },
-      { month: '2024-05', value: 77 },
-      { month: '2024-06', value: 80 },
-      { month: '2024-07', value: 90 }, // maintenance event on 2024-07-13
-      { month: '2024-08', value: 88 },
-      { month: '2024-09', value: 85 },
-      { month: '2024-10', value: 83 },
-      { month: '2024-11', value: 82 },
-      { month: '2024-12', value: 80 },
-      { month: '2025-01', value: 90 },
-      { month: '2025-02', value: 85 },
-      { month: '2025-03', value: 82 }
+      { month: '2024-09', value: 82 },
+      { month: '2024-10', value: 88 }, // 2024-10-15 故障維修
+      { month: '2024-11', value: 86 },
+      { month: '2024-12', value: 84 },
+      { month: '2025-01', value: 82 },
+      { month: '2025-02', value: 80 },
+      { month: '2025-03', value: 78 },
+      { month: '2025-04', value: 76 },
+      { month: '2025-05', value: 74 },
+      { month: '2025-06', value: 72 },
+      { month: '2025-07', value: 70 },
+      { month: '2025-08', value: 88 }, // 2025-08-14 定期保養
+      { month: '2025-09', value: 86 }
     ]
   },
   'UEI-910': {
@@ -52,21 +53,21 @@ export const carsData = {
       { level: '中等', item: '更換機油', cost: 1200 },
       { level: '例行', item: '輪胎調胎', cost: 500 }
     ],
-    // There are a couple of maintenance events in early 2024 boosting the trend.
+    // Health trend for the past year (2024-09 to 2025-09) with maintenance events
     healthTrend: [
-      { month: '2024-03', value: 90 }, // maintenance event on early March (2024-03-10)
-      { month: '2024-04', value: 92 },
-      { month: '2024-05', value: 95 }, // maintenance event on 2024-05-01
-      { month: '2024-06', value: 97 }, // maintenance event on 2024-06-13
-      { month: '2024-07', value: 95 },
-      { month: '2024-08', value: 93 },
-      { month: '2024-09', value: 90 },
-      { month: '2024-10', value: 88 },
-      { month: '2024-11', value: 87 },
-      { month: '2024-12', value: 85 },
-      { month: '2025-01', value: 83 },
+      { month: '2024-09', value: 82 },
+      { month: '2024-10', value: 88 }, // 2024-10-15 故障維修
+      { month: '2024-11', value: 86 },
+      { month: '2024-12', value: 84 },
+      { month: '2025-01', value: 82 },
       { month: '2025-02', value: 80 },
-      { month: '2025-03', value: 78 }
+      { month: '2025-03', value: 78 },
+      { month: '2025-04', value: 76 },
+      { month: '2025-05', value: 74 },
+      { month: '2025-06', value: 72 },
+      { month: '2025-07', value: 70 },
+      { month: '2025-08', value: 90 }, // 2025-08-14 定期保養
+      { month: '2025-09', value: 88 }
     ]
   },
   'APW-0322': {
