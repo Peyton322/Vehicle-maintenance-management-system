@@ -1,5 +1,7 @@
+import axios from 'axios';
+import axiosInstance from './utils/axiosInstance';
 import React, { useState, useEffect } from 'react';
-import { Button, Input, Select, Form } from 'antd';
+import { Button, Input, Select, Form , message} from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { customerData } from './customerData';
 import { UpOutlined } from '@ant-design/icons'; // 引入上箭頭圖標
@@ -15,6 +17,7 @@ const Query = () => {
   // 維修-車牌查詢
   const [plateNumber, setPlateNumber] = useState('');
   const [description, setDescription] = useState('');
+  const [loading, setLoading] = useState(false); // 新增載入狀態
   const navigate = useNavigate();
 
   //處理搜尋
@@ -34,14 +37,67 @@ const Query = () => {
     return nameMatch && phoneMatch && statusMatch && plateMatch;
   });
 
-  const handleGoClick = () => {
-    /*用 if 檢查車牌號碼是否存在（不是空值）*/
-    if (plateNumber.trim()) { /*trim() 用來去除字串前後的空格*/
-      /*輸入使用者故障狀況描述*/
-      const encodedDescription = encodeURIComponent(description.trim()); /*encodeURIComponent() 將文字轉換成 URL 安全的格式*/
-      navigate(`/car-status/${plateNumber}?description=${encodedDescription}`); /*跳轉到 car-status 頁面 同時傳入兩個參數：plateNumber（作為路徑參數）encodedDescription（作為查詢參數）*/
+  const handleGoClick = async () => {
+    // 表單驗證
+    if (!plateNumber.trim()) {
+      message.error('請輸入車牌號碼');
+      return;
+    }
+
+    // 如果沒有輸入描述，使用預設值 "無"
+    const finalDescription = description.trim() || '無';
+
+    setLoading(true); // 開始載入
+
+    try {
+      // 發送 POST 請求到 Flask 後端
+      const response = await axiosInstance.post('/predict', {
+        plateNumber: plateNumber.trim(),
+        description: finalDescription
+      }, {
+        timeout: 30000 // 30秒超時(模型運算可能需要較長時間)
+      });
+
+      // 檢查回應
+      if (response.data.success) {
+        message.success('預測完成！');
+
+        // 將預測結果傳遞到下一個頁面
+        const encodedDescription = encodeURIComponent(finalDescription);
+        navigate(`/car-status/${plateNumber}`, {
+          state: {
+            prediction: response.data.prediction,
+            confidence: response.data.confidence,
+            description: finalDescription
+          }
+        });
+      } else {
+        message.error(response.data.error || '預測失敗，請稍後再試');
+      }
+
+    } catch (error) {
+      console.error('API 請求錯誤:', error);
+
+      // 詳細錯誤處理
+      if (error.response) {
+        // 伺服器回應錯誤 (4xx, 5xx)
+        const errorMsg = error.response.data?.error || '伺服器錯誤';
+        message.error(`錯誤 ${error.response.status}: ${errorMsg}`);
+      } else if (error.request) {
+        // 請求已發送但無回應
+        message.error('無法連接到伺服器，請檢查網路連線');
+      } else if (error.code === 'ECONNABORTED') {
+        // 請求超時
+        message.error('請求超時，模型運算時間過長，請稍後再試');
+      } else {
+        // 其他錯誤
+        message.error('發生未知錯誤，請稍後再試');
+      }
+    } finally {
+      setLoading(false); // 結束載入
     }
   };
+
   // 監聽滾動事件，決定是否顯示返回頂部按鈕
   useEffect(() => {
     const handleScroll = () => {
@@ -198,37 +254,49 @@ const Query = () => {
         ) : (
           // Maintenance Query Form
           <div style={{ minHeight: '64.6vh' }}>
-          <Form
-            layout="vertical"
-           >
-            <Form.Item label="查詢車牌號碼">
-              <Input
-                placeholder="license plate number"
-                value={plateNumber}
-                onChange={(e) => setPlateNumber(e.target.value)}
-              />
-            </Form.Item>
-
-            <Form.Item label="輸入使用者故障狀況描述">
-              <Input.TextArea
-                placeholder="user needs"
-                rows={4}
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              />
-            </Form.Item>
-
-            <Form.Item>
-              <Button
-                className='button'
-                type="primary"
-                style={{ width: '100%' }}
-                onClick={handleGoClick}
+            <Form layout="vertical">
+              <Form.Item
+                label="查詢車牌號碼"
+                required
+                validateStatus={!plateNumber.trim() && loading ? 'error' : ''}
+                help={!plateNumber.trim() && loading ? '請輸入車牌號碼' : ''}
               >
-                Go
-              </Button>
-            </Form.Item>
-          </Form>
+                <Input
+                  placeholder="請輸入車牌號碼"
+                  value={plateNumber}
+                  onChange={(e) => setPlateNumber(e.target.value)}
+                  disabled={loading}
+                  maxLength={10}
+                />
+              </Form.Item>
+
+              <Form.Item
+                label="輸入使用者故障狀況描述（可選）"
+              >
+                <Input.TextArea
+                  placeholder="請詳細描述車輛故障情況，例如：引擎異響、煞車異常等（不輸入則預設為「無」）"
+                  rows={4}
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  disabled={loading}
+                  maxLength={500}
+                  showCount
+                />
+              </Form.Item>
+
+              <Form.Item>
+                <Button
+                  className='button'
+                  type="primary"
+                  style={{ width: '100%' }}
+                  onClick={handleGoClick}
+                  loading={loading}
+                  disabled={loading}
+                >
+                  {loading ? '模型運算中...' : '開始預測'}
+                </Button>
+              </Form.Item>
+            </Form>
           </div>
         )}
       </div>
@@ -288,8 +356,8 @@ const Query = () => {
           background: 'linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0.95) 45%, rgba(255,255,255,0.7) 65%, rgba(198, 190, 190, 0.5) 90%)',
         }}></div>
       </div>
-      
-    <Footer />
+
+      <Footer />
     </div>
   );
 };
