@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Footer from './Footer.js';
 import { Card, Checkbox, Button, Input } from 'antd';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { carsData } from './carData';
@@ -16,25 +15,25 @@ const RepairConfirmation = () => {
     const { plateNumber } = useParams(); // 獲取 plateNumber
     const navigate = useNavigate();
     const location = useLocation();
-    
+
     // 從 location.state 或 URL 查詢參數獲取數據
     const maintenanceItemsFromState = location.state?.maintenanceItems || [];
     const descriptionFromState = location.state?.description;
     const descriptionFromUrl = new URLSearchParams(location.search).get('description');
     const description = descriptionFromState || descriptionFromUrl;
-    
+
     // 如果沒有從 state 傳來的數據，則使用舊的 carData
     const carData = carsData[plateNumber] || { maintenanceItems: [] };
-    const maintenanceItems = maintenanceItemsFromState.length > 0 
-        ? maintenanceItemsFromState 
+    const maintenanceItems = maintenanceItemsFromState.length > 0
+        ? maintenanceItemsFromState
         : carData.maintenanceItems;
-    
+
     // 為維修項目添加 selected 屬性，預設不勾選
     const itemsWithSelection = maintenanceItems.map(item => ({
         ...item,
         selected: false
     }));
-    
+
     const [selectedItems, setSelectedItems] = useState(itemsWithSelection);
     const [customItems, setCustomItems] = useState([]); // 存放使用者新增的維修項目
     const [newItem, setNewItem] = useState({ item: '', cost: '', selected: true });
@@ -132,7 +131,6 @@ const RepairConfirmation = () => {
                 <Button className="button" onClick={() => navigate('/endPage')}>確認維修項目</Button>
 
             </div>
-            <Footer />
 
         </div>
     );

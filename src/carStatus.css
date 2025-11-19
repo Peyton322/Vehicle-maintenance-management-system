@@ -1,166 +1,327 @@
 .car-status-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  .status-card {
-    background: white;
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .status-title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 16px;
-    color: rgba(0, 0, 0, 0.88);
-  }
-  
-  .info-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-  }
-  
-  .info-label {
-    color: #666;
-    margin-bottom: 4px;
-    font-size: 14px;
-  }
-  
-  .info-value {
-    font-weight: 500;
-    color: rgba(0, 0, 0, 0.88);
-  }
-  
-  .alert-box {
-    background-color: #FEE2E2;
-    border: 1px solid #FCA5A5;
-    color: #DC2626;
-    padding: 16px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .alert-title {
-    font-weight: bold;
-    margin-bottom: 8px;
-  }
-  
-  .maintenance-item {
-    padding: 16px;
-    border-radius: 8px;
-    margin-bottom: 8px;
-  }
-  
-  .maintenance-item.urgent {
-    background-color: #FEE2E2;
-  }
-  
-  .maintenance-item.medium {
-    background-color: #FEF3C7;
-  }
-  
-  .maintenance-item.routine {
-    background-color: #D1FAE5;
-  }
-  
-  .item-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .item-name {
-    font-weight: 500;
-  }
-  
-  .item-cost {
-    color: #666;
-  }
-  
-  .progress-label {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 8px;
-  }
-  
-  .health-trend {
-    height: 300px;
-    display: flex;
-    align-items: flex-end;
-    gap: 16px;
-    padding: 20px;
-    background-color: #f5f5f5;
-    border-radius: 8px;
-  }
-  
-  .trend-bar {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 200px;
-    position: relative;
-  }
-  
-  .bar {
-    width: 40px;
-    background-color: #007E87;
-    border-radius: 4px 4px 0 0;
-    transition: height 0.3s ease;
-    position: absolute;
-    bottom: 25px; /* Space for label */
-  }
-  
-  .bar-label {
-    position: absolute;
-    bottom: 0;
-    color: #666;
-    font-size: 14px;
-  }
-  
-  /* Custom Progress Bar Colors */
-  .ant-progress-bg {
-    background-color: #007E87 !important;
-  }
-  .button {
-    background-color: #007e87b2;
-    border-color: #007E87;
-    color: white !important;
-    border-radius: 10px;
-    display: flex;           /* 添加這行 */
-    align-items: center;     /* 添加這行 */
-    justify-content: center; /* 保留這行 */
-    margin: 0 auto;         /* 添加這行，讓按鈕本身在容器中置中 */
-    width: 100%;
-    max-width: 800px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
 }
+
+.status-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.status-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+.status-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #1f2937;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.info-item {
+  background: #f1f1f1;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.info-label {
+  color: #6b7280;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-value {
+  font-weight: 600;
+  font-size: 16px;
+  color: #1f2937;
+}
+
+/* Alert Cards */
+.alert-card {
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.alert-card.alert-error {
+  background-color: #ffe7e7;
+}
+
+.alert-card.alert-warning {
+  background-color: #fffbeb;
+}
+
+.alert-card.alert-info {
+  background-color: #f0fdf4;
+}
+
+.alert-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.alert-icon {
+  font-size: 32px;
+  line-height: 1;
+}
+
+.alert-title {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 4px;
+  color: #1f2937;
+}
+
+.alert-message {
+  color: #4b5563;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Maintenance Items */
+.maintenance-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.maintenance-item {
+  padding: 16px;
+  border-radius: 10px;
+  border: 2px solid;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.maintenance-item:hover {
+  transform: translateX(4px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.maintenance-item.urgent {
+  background-color: #fef2f2;
+  border-color: #fca5a5;
+}
+
+.maintenance-item.medium {
+  background-color: #fffbeb;
+  border-color: #fcd34d;
+}
+
+.maintenance-item.routine {
+  background-color: #f0fdf4;
+  border-color: #86efac;
+}
+
+.item-badge {
+  flex-shrink: 0;
+}
+
+.level-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  background: white;
+}
+
+.urgent .level-badge {
+  color: #dc2626;
+  border: 1px solid #dc2626;
+}
+
+.medium .level-badge {
+  color: #d97706;
+  border: 1px solid #d97706;
+}
+
+.routine .level-badge {
+  color: #059669;
+  border: 1px solid #059669;
+}
+
+.item-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+}
+
+.item-name {
+  font-weight: 500;
+  color: #1f2937;
+  font-size: 15px;
+}
+
+.item-cost {
+  color: #007E87;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.no-maintenance {
+  text-align: center;
+  padding: 40px 20px;
+  color: #6b7280;
+}
+
+.no-maintenance p {
+  font-size: 16px;
+  margin: 0;
+}
+
+/* Progress Items */
+.progress-item {
+  margin-bottom: 20px;
+}
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.part-name {
+  font-weight: 500;
+  color: #1f2937;
+  font-size: 14px;
+}
+
+.part-percentage {
+  font-weight: 600;
+  color: #007E87;
+  font-size: 14px;
+}
+
+/* Description Box */
+.description-box {
+  background: #f1f1f1;
+  padding: 16px;
+  border-radius: 8px;
+  min-height: 60px;
+}
+
+.description-box p {
+  margin: 0;
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+/* Chart Container */
+.chart-card {
+  overflow-x: auto;
+}
+
+.chart-container {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+}
+
+@media (max-width: 768px) {
+  .chart-container {
+    overflow-x: scroll;
+  }
+}
+
+/* Custom Progress Bar */
+.ant-progress-bg {
+  transition: all 0.3s ease !important;
+}
+
+.ant-progress-inner {
+  background-color: #e5e7eb !important;
+}
+
+/* Buttons */
+.button {
+  background: linear-gradient(135deg, #007E87 0%, #00989F 100%);
+  border: none;
+  color: white !important;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto;
+  width: 100%;
+  max-width: 800px;
+  height: 48px;
+  font-size: 16px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 126, 135, 0.3);
+  transition: all 0.3s ease;
+}
+
 .button:hover {
-    background-color: #00585e !important;
-    border-color: #00585e  !important;
-    color: white !important;
+  background: linear-gradient(135deg, #00585e 0%, #007E87 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 126, 135, 0.4);
+  color: white !important;
 }
 
 .button:active {
-    transform: scale(0.98);
-    background-color: #00585e !important;
-    border-color: #00585e  !important;
-    color: white !important;
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 126, 135, 0.3);
 }
 
-.retutnButton{
-    background-color: #f0f0f0 !important;
-    border: 1px solid #727272 !important;
-    border-radius: 6px !important;
-    color: rgba(0, 0, 0, 0.88) !important;
-    margin: 10px;
+.retutnButton {
+  background-color: white !important;
+  border: 2px solid #d1d5db !important;
+  border-radius: 8px !important;
+  color: #4b5563 !important;
+  margin: 10px 20px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.retutnButton:hover {
+  background-color: #f9fafb !important;
+  border-color: #007E87 !important;
+  color: #007E87 !important;
+  transform: translateX(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .car-status-container {
+    padding: 16px;
   }
-  
-  .retutnButton:hover {
-    background-color: #727272 !important;
-    color: white !important;
+
+  .status-card {
+    padding: 20px;
   }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .status-title {
+    font-size: 18px;
+  }
+
+  .chart-container {
+    overflow-x: auto;
+  }
+}

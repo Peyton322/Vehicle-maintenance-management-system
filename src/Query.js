@@ -1,12 +1,11 @@
 import axios from 'axios';
 import axiosInstance from './utils/axiosInstance';
 import React, { useState, useEffect } from 'react';
-import { Button, Input, Select, Form , message} from 'antd';
+import { Button, Input, Select, Form, message, Spin } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import { customerData } from './customerData';
 import { UpOutlined } from '@ant-design/icons'; // 引入上箭頭圖標
-import Footer from './Footer';
 import './query.css'
+
 const Query = () => {
   const [activeQuery, setActiveQuery] = useState('customer'); // 初始值設為 'customer'
   // 歷史資料-客戶查詢
@@ -18,7 +17,110 @@ const Query = () => {
   const [plateNumber, setPlateNumber] = useState('');
   const [description, setDescription] = useState('');
   const [loading, setLoading] = useState(false); // 新增載入狀態
+  const [customerData, setCustomerData] = useState([]); // 從 API 獲取的客戶資料
+  const [dataLoading, setDataLoading] = useState(true); // 資料載入狀態
   const navigate = useNavigate();
+
+  // 名字池 - 為每台車分配一個名字
+  const namePool = [
+    '王小明', '李大華', '張美玲', '陳志強', '林雅婷',
+    '黃俊傑', '吳淑芬', '劉建國', '蔡佩君', '鄭宇軒',
+    '楊欣怡', '許文賢', '謝婉婷', '洪志豪', '周思穎',
+    '徐建宏', '孫雅琪', '高明哲', '郭雅玲', '梁志偉',
+    '顏淑華', '潘建成', '呂佳蓉', '曾俊宏', '彭雅婷',
+    '游志明', '賴淑芬', '詹建華', '方雅琳', '石志強'
+  ];
+
+  // 為車牌號碼生成一致的名字（使用簡單的雜湊）
+  const getNameForPlate = (plateNumber) => {
+    let hash = 0;
+    for (let i = 0; i < plateNumber.length; i++) {
+      hash = plateNumber.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    const index = Math.abs(hash) % namePool.length;
+    return namePool[index];
+  };
+
+  // 生成隨機電話號碼
+  const generatePhone = (plateNumber) => {
+    let hash = 0;
+    for (let i = 0; i < plateNumber.length; i++) {
+      hash = plateNumber.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    const randomNum = Math.abs(hash) % 100000000;
+    return `09${String(randomNum).padStart(8, '0')}`;
+  };
+
+  // 從後端 API 獲取所有車輛資料
+  useEffect(() => {
+    const fetchAllCustomers = async () => {
+      try {
+        setDataLoading(true);
+        const response = await axiosInstance.get('/history'); // 不帶參數，獲取所有記錄
+
+        if (response.data.success) {
+          const records = response.data.records;
+
+          // 按車牌號碼分組
+          const groupedByPlate = {};
+          records.forEach(record => {
+            const plate = record.CarID;
+            if (!groupedByPlate[plate]) {
+              groupedByPlate[plate] = {
+                plate: plate,
+                brand: record.CarBrand || '未知品牌',
+                style: record.CarStyle || '未知型號',
+                year: record.CarYear || '',
+                lastMaintenance: record.CreateDate || '未知',
+                maintenanceCount: 0
+              };
+            }
+            groupedByPlate[plate].maintenanceCount++;
+
+            // 保留最新的維修日期
+            if (new Date(record.CreateDate) > new Date(groupedByPlate[plate].lastMaintenance)) {
+              groupedByPlate[plate].lastMaintenance = record.CreateDate;
+            }
+          });
+
+          // 轉換成前端所需格式
+          const customers = Object.values(groupedByPlate).map(car => {
+            const ownerName = getNameForPlate(car.plate);
+            const phone = generatePhone(car.plate);
+
+            // 根據維修次數判斷狀態
+            let status = '優良';
+            if (car.maintenanceCount > 15) {
+              status = '不佳';
+            } else if (car.maintenanceCount > 8) {
+              status = '良好';
+            }
+
+            return {
+              name: ownerName,
+              phone: phone,
+              carInfo: {
+                plate: car.plate,
+                model: `${car.brand} ${car.style} ${car.year}`
+              },
+              lastMaintenance: car.lastMaintenance,
+              status: status
+            };
+          });
+
+          setCustomerData(customers);
+        }
+      } catch (error) {
+        console.error('獲取客戶資料失敗:', error);
+        message.error('無法載入客戶資料，請稍後再試');
+        setCustomerData([]);
+      } finally {
+        setDataLoading(false);
+      }
+    };
+
+    fetchAllCustomers();
+  }, []);
 
   //處理搜尋
   const handleSearch = (values) => {
@@ -220,35 +322,40 @@ const Query = () => {
               </Form.Item>
             </Form>
 
-            <div className="customer-list">
-              <h2>所有客戶資料</h2>
-              {filteredCustomers.map((customer, index) => {
-                const anonymizedName = customer.name.length > 1
-                  ? customer.name[0] + 'O' + customer.name.slice(2)
-                  : customer.name;
-                return (
-                  <div key={index} className="customer-card">
-                    <div className="customer-name">{anonymizedName}</div>
-                    <div className="customer-phone">📞 {customer.phone}</div>
-                    <div className="customer-car">
-                      🚗 {customer.carInfo.plate} {customer.carInfo.model}
+            {dataLoading ? (
+              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '300px' }}>
+                <Spin size="large" tip="載入客戶資料中..." />
+              </div>
+            ) : (
+              <div className="customer-list">
+                <h2>所有客戶資料</h2>
+                {filteredCustomers.map((customer, index) => {
+                  const anonymizedName = customer.name.length > 1
+                    ? customer.name[0] + 'O' + customer.name.slice(2)
+                    : customer.name;
+                  return (
+                    <div key={index} className="customer-card">
+                      <div className="customer-name">{anonymizedName}</div>
+                      <div className="customer-phone">📞 {customer.phone}</div>
+                      <div className="customer-car">
+                        🚗 {customer.carInfo.plate} {customer.carInfo.model}
+                      </div>
+                      <div className="maintenance-info">
+                        <div>最近維修：{customer.lastMaintenance}</div>
+                      </div>
+                      <Button className="detail-button"
+                        onClick={() => navigate(`/customer-history/${customer.carInfo.plate}`)}>
+                        查看歷史資料</Button>
                     </div>
-                    <div className="maintenance-info">
-                      <div>最近維修：{customer.lastMaintenance}</div>
-                      <div>狀態：{customer.status}</div>
-                    </div>
-                    <Button className="detail-button"
-                      onClick={() => navigate(`/customer-history/${customer.carInfo.plate}`)}>
-                      查看歷史資料</Button>
+                  );
+                })}
+                {filteredCustomers.length === 0 && (
+                  <div style={{ textAlign: 'center', padding: '20px' }}>
+                    未找到符合條件的客戶資料
                   </div>
-                );
-              })}
-              {filteredCustomers.length === 0 && (
-                <div style={{ textAlign: 'center', padding: '20px' }}>
-                  未找到符合條件的客戶資料
-                </div>
-              )}
-            </div>
+                )}
+              </div>
+            )}
           </div>
 
         ) : (
@@ -333,31 +440,6 @@ const Query = () => {
           <UpOutlined style={{ fontSize: '18px' }} />
         </div>
       )}
-
-      <div style={{
-        position: 'fixed', // 改為 fixed，確保滾動時背景跟隨
-        bottom: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        backgroundImage: `url(${require('./images/car.jpg')})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center bottom',
-        backgroundRepeat: 'no-repeat',
-        zIndex: -1 // 確保在內容下方
-      }}>
-        {/* 漸層遮罩 */}
-        <div style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          background: 'linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0.95) 45%, rgba(255,255,255,0.7) 65%, rgba(198, 190, 190, 0.5) 90%)',
-        }}></div>
-      </div>
-
-      <Footer />
     </div>
   );
 };

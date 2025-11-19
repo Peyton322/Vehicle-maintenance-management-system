@@ -3,7 +3,6 @@ import { Card, Progress, Button, Spin, message } from 'antd';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 import axiosInstance from './utils/axiosInstance';
-import Footer from './Footer.js';
 import './carStatus.css';
 import './repairConfirmation.js'
 
@@ -227,82 +226,103 @@ const CarStatus = () => {
             <div className="car-status-container">
                 {/* 車輛基本資訊 */}
 
-                <div className="status-card">
-                    <h2 className="status-title">車主資訊</h2>
+                <Card className="status-card" bordered={false}>
+                    <h2 className="status-title">車輛資訊</h2>
                     <div className="info-grid">
-                        <div>
+                        <div className="info-item">
                             <div className="info-label">車牌號碼</div>
                             <div className="info-value">{carData.plateNumber}</div>
                         </div>
-                        <div>
+                        <div className="info-item">
                             <div className="info-label">車型</div>
                             <div className="info-value">{carData.model}</div>
                         </div>
                     </div>
-                </div>
+                </Card>
 
                 {/* 警告信息 */}
-                <div className="alert-box">
-                    <p className="alert-title">需要立即注意</p>
-                    <p>{carData.maintenanceAlert.message}</p>
-                </div>
+                <Card className={`alert-card alert-${carData.maintenanceAlert.type}`} bordered={false}>
+                    <div className="alert-content">
+                        <span className="alert-icon">
+                            {carData.maintenanceAlert.type === 'error' ? '⚠️' :
+                                carData.maintenanceAlert.type === 'warning' ? '⚡' : 'ℹ️'}
+                        </span>
+                        <div>
+                            <p className="alert-title">
+                                {carData.maintenanceAlert.type === 'error' ? '緊急警告' :
+                                    carData.maintenanceAlert.type === 'warning' ? '注意事項' : '狀態良好'}
+                            </p>
+                            <p className="alert-message">{carData.maintenanceAlert.message}</p>
+                        </div>
+                    </div>
+                </Card>
 
                 {/* 壽命預測 */}
-                <div className="status-card">
+                <Card className="status-card" bordered={false}>
                     <h2 className="status-title">零件故障率預測</h2>
                     <div className="space-y-4">
                         {carData.lifePrediction.map((item, index) => (
-                            <div key={index} className="mb-4">
+                            <div key={index} className="progress-item">
                                 <div className="progress-label">
-                                    <span>{item.name}</span>
+                                    <span className="part-name">{item.name}</span>
+                                    <span className="part-percentage">{item.percentage.toFixed(1)}%</span>
                                 </div>
-                                <Progress percent={item.percentage} />
+                                <Progress
+                                    percent={item.percentage}
+                                    strokeColor={
+                                        item.percentage >= 70 ? '#fca5a5' :
+                                            item.percentage >= 40 ? '#fcd34d' :
+                                                '#86efac'
+                                    }
+                                    showInfo={false}
+                                />
                             </div>
                         ))}
                     </div>
-                </div>
+                </Card>
 
                 {/* 建議維修項目 */}
-                <div className="status-card">
-                    <h2 className="status-title">建議維修項目</h2>
-                    <div>
-                        {carData.maintenanceItems.map((item, index) => (
-                            <div
-                                key={index}
-                                className={`maintenance-item ${getMaintenanceClass(item.level)}`}
-                            >
-                                <div className="item-content">
-                                    <span className="item-name">{item.item}</span>
-                                    <span className="item-cost">預估費用: {item.cost}</span>
+                <Card className="status-card" bordered={false}>
+                    <h2 className="status-title">🔧 建議維修項目</h2>
+                    <div className="maintenance-list">
+                        {carData.maintenanceItems.length > 0 ? (
+                            carData.maintenanceItems.map((item, index) => (
+                                <div
+                                    key={index}
+                                    className={`maintenance-item ${getMaintenanceClass(item.level)}`}
+                                >
+                                    <div className="item-badge">
+                                        <span className="level-badge">{item.level}</span>
+                                    </div>
+                                    <div className="item-content">
+                                        <span className="item-name">{item.item}</span>
+                                        <span className="item-cost">NT$ {item.cost.toLocaleString()}</span>
+                                    </div>
                                 </div>
+                            ))
+                        ) : (
+                            <div className="no-maintenance">
+                                <p>✅ 目前無需維修項目</p>
                             </div>
-                        ))}
+                        )}
                     </div>
-                </div>
+                </Card>
 
                 {/* 客戶描述問題 */}
-                <div className="status-card">
-                    <h2 className="status-title">客戶描述問題</h2>
-                    <p>{description ? description : '無'}</p>
-                </div>
+                <Card className="status-card" bordered={false}>
+                    <h2 className="status-title">💬 客戶描述問題</h2>
+                    <div className="description-box">
+                        <p>{description ? description : '無特別描述'}</p>
+                    </div>
+                </Card>
 
-                {/* 整體健康趨勢 */}
-                <div className="status-card">
-                    <h2 className="status-title">整體健康趨勢</h2>
-                    <LineChart width={700} height={300} data={carData.healthTrend}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="month" />
-                        <YAxis domain={[0, 100]} />
-                        <Tooltip formatter={(value, name) => [value, '狀態']} />
-                        <Line type="monotone" dataKey="value" stroke="#007E87" activeDot={{ r: 8 }} />
-                    </LineChart>
-                </div>
+
                 <Button className='button' onClick={handleGoClick}>
                     下一步
                 </Button>
 
             </div>
-            <Footer />
+
 
         </div>
     );
