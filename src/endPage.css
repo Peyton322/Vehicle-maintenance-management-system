@@ -25,14 +25,14 @@
 }
 
 .home-button {
-    background-color: #007e87b2;
-    border-color: #007E87;
+    background-color: #6b7280;
+    border-color: #6b7280;
     color: white;
     border-radius: 10px;
 }
 
 .home-button:hover {
-    background-color: #00585e !important;
-    border-color: #00585e  !important;
+    background-color: #4b5563 !important;
+    border-color: #4b5563 !important;
     color: white !important;
 }

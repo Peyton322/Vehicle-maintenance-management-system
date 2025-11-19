@@ -16,6 +16,8 @@ const CarStatus = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [carData, setCarData] = useState(null);
+    const [showAllPredictions, setShowAllPredictions] = useState(false);
+    const [showAllMaintenanceItems, setShowAllMaintenanceItems] = useState(false);
     // 從後端獲取數據
     useEffect(() => {
         const fetchCarData = async () => {
@@ -215,7 +217,7 @@ const CarStatus = () => {
                 <div style={{
                     width: '100%',
                     height: '50px',
-                    backgroundColor: '#007E87', // 您可以自定義顏色，這是一個藍色
+                    backgroundColor: '#6b7280',
                     marginBottom: '15px',
                 }}>
                 </div>
@@ -261,7 +263,7 @@ const CarStatus = () => {
                 <Card className="status-card" bordered={false}>
                     <h2 className="status-title">零件故障率預測</h2>
                     <div className="space-y-4">
-                        {carData.lifePrediction.map((item, index) => (
+                        {(showAllPredictions ? carData.lifePrediction : carData.lifePrediction.slice(0, 5)).map((item, index) => (
                             <div key={index} className="progress-item">
                                 <div className="progress-label">
                                     <span className="part-name">{item.name}</span>
@@ -279,14 +281,25 @@ const CarStatus = () => {
                             </div>
                         ))}
                     </div>
+                    {carData.lifePrediction.length > 5 && (
+                        <div style={{ textAlign: 'center', marginTop: '16px' }}>
+                            <Button
+                                type="link"
+                                onClick={() => setShowAllPredictions(!showAllPredictions)}
+                                style={{ color: '#6b7280', fontWeight: 500 }}
+                            >
+                                {showAllPredictions ? '收起 ▲' : `顯示更多 (${carData.lifePrediction.length - 5}) ▼`}
+                            </Button>
+                        </div>
+                    )}
                 </Card>
 
                 {/* 建議維修項目 */}
                 <Card className="status-card" bordered={false}>
-                    <h2 className="status-title">🔧 建議維修項目</h2>
+                    <h2 className="status-title">建議維修項目</h2>
                     <div className="maintenance-list">
                         {carData.maintenanceItems.length > 0 ? (
-                            carData.maintenanceItems.map((item, index) => (
+                            (showAllMaintenanceItems ? carData.maintenanceItems : carData.maintenanceItems.slice(0, 5)).map((item, index) => (
                                 <div
                                     key={index}
                                     className={`maintenance-item ${getMaintenanceClass(item.level)}`}
@@ -306,11 +319,22 @@ const CarStatus = () => {
                             </div>
                         )}
                     </div>
+                    {carData.maintenanceItems.length > 5 && (
+                        <div style={{ textAlign: 'center', marginTop: '16px' }}>
+                            <Button
+                                type="link"
+                                onClick={() => setShowAllMaintenanceItems(!showAllMaintenanceItems)}
+                                style={{ color: '#6b7280', fontWeight: 500 }}
+                            >
+                                {showAllMaintenanceItems ? '收起 ▲' : `顯示更多 (${carData.maintenanceItems.length - 5}) ▼`}
+                            </Button>
+                        </div>
+                    )}
                 </Card>
 
                 {/* 客戶描述問題 */}
                 <Card className="status-card" bordered={false}>
-                    <h2 className="status-title">💬 客戶描述問題</h2>
+                    <h2 className="status-title">客戶描述問題</h2>
                     <div className="description-box">
                         <p>{description ? description : '無特別描述'}</p>
                     </div>

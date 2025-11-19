@@ -9,12 +9,12 @@
   border-radius: 12px;
   padding: 24px;
   margin-bottom: 20px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
   transition: all 0.3s ease;
 }
 
 .status-card:hover {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transform: translateY(-2px);
 }
 
@@ -59,6 +59,7 @@
 .alert-card {
   border-radius: 12px;
   margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .alert-card.alert-error {
@@ -175,7 +176,7 @@
 }
 
 .item-cost {
-  color: #007E87;
+  color: #6b7280;
   font-weight: 600;
   font-size: 15px;
 }
@@ -211,7 +212,7 @@
 
 .part-percentage {
   font-weight: 600;
-  color: #007E87;
+  color: #6b7280;
   font-size: 14px;
 }
 
@@ -257,7 +258,7 @@
 
 /* Buttons */
 .button {
-  background: linear-gradient(135deg, #007E87 0%, #00989F 100%);
+  background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
   border: none;
   color: white !important;
   border-radius: 12px;
@@ -270,20 +271,20 @@
   height: 48px;
   font-size: 16px;
   font-weight: 600;
-  box-shadow: 0 4px 12px rgba(0, 126, 135, 0.3);
+  box-shadow: 0 4px 12px rgba(107, 114, 128, 0.3);
   transition: all 0.3s ease;
 }
 
 .button:hover {
-  background: linear-gradient(135deg, #00585e 0%, #007E87 100%);
+  background: linear-gradient(135deg, #4b5563 0%, #374151 100%);
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 126, 135, 0.4);
+  box-shadow: 0 6px 16px rgba(107, 114, 128, 0.4);
   color: white !important;
 }
 
 .button:active {
   transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(0, 126, 135, 0.3);
+  box-shadow: 0 2px 8px rgba(107, 114, 128, 0.3);
 }
 
 .retutnButton {
@@ -298,9 +299,8 @@
 
 .retutnButton:hover {
   background-color: #f9fafb !important;
-  border-color: #007E87 !important;
-  color: #007E87 !important;
-  transform: translateX(-2px);
+  border-color: #6b7280 !important;
+  color: #6b7280 !important;
 }
 
 /* Responsive */

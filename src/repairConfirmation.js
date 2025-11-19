@@ -37,6 +37,7 @@ const RepairConfirmation = () => {
     const [selectedItems, setSelectedItems] = useState(itemsWithSelection);
     const [customItems, setCustomItems] = useState([]); // 存放使用者新增的維修項目
     const [newItem, setNewItem] = useState({ item: '', cost: '', selected: true });
+    const [showAllRecommendedItems, setShowAllRecommendedItems] = useState(false);
 
     // 切換建議維修項目的選擇狀態
     const handleCheckboxChange = (index, type) => {
@@ -74,7 +75,7 @@ const RepairConfirmation = () => {
                 <div style={{
                     width: '100%',
                     height: '50px',
-                    backgroundColor: '#007E87', // 您可以自定義顏色，這是一個藍色
+                    backgroundColor: '#6b7280',
                     marginBottom: '15px',
                 }}>
                 </div>
@@ -87,14 +88,27 @@ const RepairConfirmation = () => {
                 <div className='status-card'>
                     <h2 className="status-title"><CarOutlined /> 系統建議維修項目</h2>
                     {selectedItems.length > 0 ? (
-                        selectedItems.map((item, index) => (
-                            <Card key={index} className="repair-card">
-                                <Checkbox className="custom-checkbox" checked={item.selected} onChange={() => handleCheckboxChange(index, 'recommended')}>
-                                    {item.item}
-                                </Checkbox>
-                                <span className="repair-cost">NT${item.cost}</span>
-                            </Card>
-                        ))
+                        <>
+                            {(showAllRecommendedItems ? selectedItems : selectedItems.slice(0, 5)).map((item, index) => (
+                                <Card key={index} className="repair-card">
+                                    <Checkbox className="custom-checkbox" checked={item.selected} onChange={() => handleCheckboxChange(index, 'recommended')}>
+                                        {item.item}
+                                    </Checkbox>
+                                    <span className="repair-cost">NT${item.cost}</span>
+                                </Card>
+                            ))}
+                            {selectedItems.length > 5 && (
+                                <div style={{ textAlign: 'center', marginTop: '16px' }}>
+                                    <Button
+                                        type="link"
+                                        onClick={() => setShowAllRecommendedItems(!showAllRecommendedItems)}
+                                        style={{ color: '#6b7280', fontWeight: 500 }}
+                                    >
+                                        {showAllRecommendedItems ? '收起 ▲' : `顯示更多 (${selectedItems.length - 5}) ▼`}
+                                    </Button>
+                                </div>
+                            )}
+                        </>
                     ) : (
                         <p>無建議維修項目</p>
                     )}

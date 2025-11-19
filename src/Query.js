@@ -233,7 +233,7 @@ const Query = () => {
         <div style={{
           width: '100%',
           height: '50px',
-          backgroundColor: '#007E87', // 您可以自定義顏色，這是一個藍色
+          backgroundColor: '#6b7280',
           marginBottom: '15px',
         }}>
         </div>
@@ -336,9 +336,9 @@ const Query = () => {
                   return (
                     <div key={index} className="customer-card">
                       <div className="customer-name">{anonymizedName}</div>
-                      <div className="customer-phone">📞 {customer.phone}</div>
+                      <div className="customer-phone">電話 : {customer.phone}</div>
                       <div className="customer-car">
-                        🚗 {customer.carInfo.plate} {customer.carInfo.model}
+                        車型 :  {customer.carInfo.plate} {customer.carInfo.model}
                       </div>
                       <div className="maintenance-info">
                         <div>最近維修：{customer.lastMaintenance}</div>
@@ -418,7 +418,7 @@ const Query = () => {
             width: '40px',
             height: '40px',
             borderRadius: '50%',
-            backgroundColor: '#007E87',
+            backgroundColor: '#6b7280',
             color: 'white',
             display: 'flex',
             alignItems: 'center',
@@ -429,11 +429,11 @@ const Query = () => {
             transition: 'all 0.3s ease',
           }}
           onMouseOver={(e) => {
-            e.currentTarget.style.backgroundColor = '#00989F';
+            e.currentTarget.style.backgroundColor = '#4b5563';
             e.currentTarget.style.transform = 'translateY(-3px)';
           }}
           onMouseOut={(e) => {
-            e.currentTarget.style.backgroundColor = '#007E87';
+            e.currentTarget.style.backgroundColor = '#6b7280';
             e.currentTarget.style.transform = 'translateY(0)';
           }}
         >

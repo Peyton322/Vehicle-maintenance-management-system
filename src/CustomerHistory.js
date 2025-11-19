@@ -169,7 +169,7 @@ const CustomerHistory = () => {
         <div style={{
           width: '100%',
           height: '50px',
-          backgroundColor: '#007E87', // 您可以自定義顏色，這是一個藍色
+          backgroundColor: '#6b7280',
           marginBottom: '15px',
         }}>
         </div>

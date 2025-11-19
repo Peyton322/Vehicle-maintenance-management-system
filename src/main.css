@@ -1,33 +1,42 @@
 .background {
-    background-color: #C0DCDE;
-    height: 250px;  /* 調整背景高度 */
+    background-color: #e5e7eb;
+    height: 250px;
+    /* 調整背景高度 */
     width: 100%;
-    padding-top: 30px;  /* 讓圖片離上方有距離 */
+    padding-top: 30px;
+    /* 讓圖片離上方有距離 */
 }
 
 .form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 20px;  /* 表單和背景之間的間距 */
+    padding-top: 20px;
+    /* 表單和背景之間的間距 */
 }
+
 .button {
-    background-color: #007E87;
-    border-color: #007E87;
+    background-color: #6b7280 !important;
+    border-color: #6b7280 !important;
     color: white !important;
     border-radius: 10px;
+    transition: all 0.3s ease !important;
 }
 
 .button:hover {
-    background-color: #00585e !important;
-    border-color: #00585e  !important;
+    background-color: #4b5563 !important;
+    border-color: #4b5563 !important;
     color: white !important;
 }
 
 .button:active {
-    transform: scale(0.98);
-    background-color: #00585e !important;
-    border-color: #00585e  !important;
+    background-color: #374151 !important;
+    border-color: #374151 !important;
     color: white !important;
 }
 
+.button:focus {
+    background-color: #6b7280 !important;
+    border-color: #6b7280 !important;
+    color: white !important;
+}
