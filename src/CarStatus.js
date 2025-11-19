@@ -27,10 +27,10 @@ const CarStatus = () => {
                     plateNumber: plateNumber,
                     description: description || '無特別描述'
                 });
-                
+
                 if (response.data.success) {
                     const predictions = response.data.predictions;
-                    
+
                     // 檢查是否有預測數據
                     if (!predictions || predictions.length === 0) {
                         message.warning('未找到該車輛的預測資料');
@@ -47,31 +47,31 @@ const CarStatus = () => {
                         });
                         return;
                     }
-                    
+
                     // 處理零件故障率預測數據
                     const partFailureMap = {};
                     predictions.forEach(pred => {
                         const partName = pred.goodsName;
                         const failureProb = (pred.failureProb * 100).toFixed(1);
-                        
+
                         if (!partFailureMap[partName] || partFailureMap[partName] < failureProb) {
                             partFailureMap[partName] = failureProb;
                         }
                     });
-                    
+
                     // 轉換成圖表數據格式
                     const lifePrediction = Object.entries(partFailureMap).map(([name, percentage]) => ({
                         name: name,
                         percentage: parseFloat(percentage)
                     }));
-                    
+
                     // 根據故障率生成維修建議
                     const maintenanceItems = lifePrediction
                         .filter(item => item.percentage > 20) // 只顯示故障率大於20%的
                         .map(item => {
                             let level = '例行';
                             let cost = 1000;
-                            
+
                             if (item.percentage >= 70) {
                                 level = '緊急';
                                 cost = Math.floor(Math.random() * 3000) + 3000; // 3000-6000
@@ -81,7 +81,7 @@ const CarStatus = () => {
                             } else {
                                 cost = Math.floor(Math.random() * 1000) + 500; // 500-1500
                             }
-                            
+
                             return {
                                 level: level,
                                 item: `檢修/更換 ${item.name}`,
@@ -92,21 +92,20 @@ const CarStatus = () => {
                             const levelOrder = { '緊急': 0, '中等': 1, '例行': 2 };
                             return levelOrder[a.level] - levelOrder[b.level];
                         });
-                    
-                    // 獲取車型資訊（從第一筆預測記錄）
+
+                    // 獲取車型資訊(從後端返回的資料)
+                    const carBrand = response.data.carBrand || '未知品牌';
+                    const carStyle = response.data.carStyle || '未知型號';
+
                     const firstPred = predictions[0];
                     const carAgeYears = firstPred.carAgeYears || 0;
                     const currentYear = new Date().getFullYear();
                     const carYear = currentYear - carAgeYears;
-                    
-                    // 從車牌號碼推斷車型（這裡可以根據實際情況調整）
-                    const carBrand = '未知品牌';
-                    const carStyle = '未知型號';
-                    
+
                     // 生成健康趨勢數據（模擬數據，基於故障率）
                     const avgFailureRate = lifePrediction.reduce((sum, item) => sum + item.percentage, 0) / lifePrediction.length;
                     const healthScore = Math.max(0, 100 - avgFailureRate);
-                    
+
                     const healthTrend = [];
                     for (let i = 11; i >= 0; i--) {
                         const date = new Date();
@@ -116,15 +115,15 @@ const CarStatus = () => {
                         const value = Math.max(0, Math.min(100, healthScore + randomVariation));
                         healthTrend.push({ month, value: Math.floor(value) });
                     }
-                    
+
                     // 生成警告訊息
                     let alertMessage = '無';
                     let alertType = 'info';
-                    
+
                     if (maintenanceItems.length > 0) {
                         const urgentItems = maintenanceItems.filter(item => item.level === '緊急');
                         const mediumItems = maintenanceItems.filter(item => item.level === '中等');
-                        
+
                         if (urgentItems.length > 0) {
                             alertMessage = `緊急：${urgentItems.map(item => item.item).join('、')}`;
                             alertType = 'error';
@@ -136,7 +135,7 @@ const CarStatus = () => {
                             alertType = 'info';
                         }
                     }
-                    
+
                     setCarData({
                         plateNumber: plateNumber,
                         model: `${carBrand} ${carStyle} ${carYear}`,
@@ -167,7 +166,7 @@ const CarStatus = () => {
                 setLoading(false);
             }
         };
-        
+
         fetchCarData();
     }, [plateNumber]);
 
