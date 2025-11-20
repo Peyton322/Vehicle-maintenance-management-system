@@ -241,15 +241,9 @@ const Query = () => {
       <div className='title'>
         <img
           src={require("./images/front-car.png")}
-          style={{
-            width: '50px', // 設置固定寬度
-            height: '50px',
-            objectFit: 'contain',
-            objectPosition: 'center',
-          }}
           alt="maintenance"
         />
-        <h1 style={{ margin: 0 }}>車輛維修管理系統</h1>
+        <h1>車輛維修管理系統</h1>
       </div>
       <div className='query_container'>
         {/* Button Group */}
@@ -323,7 +317,15 @@ const Query = () => {
             </Form>
 
             {dataLoading ? (
-              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '300px' }}>
+              <div style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                minHeight: '400px',
+                background: 'white',
+                borderRadius: '12px',
+                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)'
+              }}>
                 <Spin size="large" tip="載入客戶資料中..." />
               </div>
             ) : (
@@ -350,7 +352,15 @@ const Query = () => {
                   );
                 })}
                 {filteredCustomers.length === 0 && (
-                  <div style={{ textAlign: 'center', padding: '20px' }}>
+                  <div style={{
+                    textAlign: 'center',
+                    padding: '40px 20px',
+                    background: 'white',
+                    borderRadius: '12px',
+                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+                    color: '#6b7280'
+                  }}>
+                    <div style={{ fontSize: '16px', marginBottom: '8px' }}>🔍</div>
                     未找到符合條件的客戶資料
                   </div>
                 )}
@@ -360,7 +370,7 @@ const Query = () => {
 
         ) : (
           // Maintenance Query Form
-          <div style={{ minHeight: '64.6vh' }}>
+          <div style={{ minHeight: '500px' }}>
             <Form layout="vertical">
               <Form.Item
                 label="查詢車牌號碼"

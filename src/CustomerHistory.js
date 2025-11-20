@@ -119,8 +119,25 @@ const CustomerHistory = () => {
   // 載入中狀態
   if (loading) {
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-        <Spin size="large" tip="載入歷史資料中..." />
+      <div>
+        <div style={{
+          width: '100%',
+          height: '50px',
+          backgroundColor: '#6b7280',
+          marginBottom: '15px',
+        }}></div>
+        <div style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: 'calc(100vh - 65px)',
+          background: 'white',
+          borderRadius: '12px',
+          margin: '20px',
+          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)'
+        }}>
+          <Spin size="large" tip="載入歷史資料中..." />
+        </div>
       </div>
     );
   }
@@ -128,14 +145,28 @@ const CustomerHistory = () => {
   // 如果找不到對應的客戶資料，顯示錯誤信息
   if (!customerDetail) {
     return (
-      <div style={{ padding: '24px' }}>
-        <Button onClick={() => navigate(-1)} style={{ marginBottom: '20px' }}>
-          返回
-        </Button>
-        <Card>
-          <h2>找不到客戶資料</h2>
-          <p>沒有找到車牌號碼 {id} 的相關資料</p>
-        </Card>
+      <div>
+        <div style={{
+          width: '100%',
+          height: '50px',
+          backgroundColor: '#6b7280',
+          marginBottom: '15px',
+        }}></div>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '24px' }}>
+          <Button onClick={() => navigate(-1)} className="back-button">
+            返回
+          </Button>
+          <Card style={{
+            textAlign: 'center',
+            padding: '40px',
+            borderRadius: '12px',
+            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)'
+          }}>
+            <div style={{ fontSize: '48px', marginBottom: '16px' }}>🔍</div>
+            <h2 style={{ color: '#374151', marginBottom: '12px' }}>找不到客戶資料</h2>
+            <p style={{ color: '#6b7280', fontSize: '16px' }}>沒有找到車牌號碼 <strong>{id}</strong> 的相關資料</p>
+          </Card>
+        </div>
       </div>
     );
   }
@@ -179,7 +210,7 @@ const CustomerHistory = () => {
           返回
         </Button>
 
-        <Card title={`🚗${customerDetail.carInfo.plate}   ${customerDetail.carInfo.model}`} className="info-card">
+        <Card className="info-card">
           <div className="info-grid">
             <div>
               <h4>車主姓名</h4>
@@ -188,6 +219,14 @@ const CustomerHistory = () => {
                   ? customerDetail.carInfo.owner[0] + 'O' + customerDetail.carInfo.owner.slice(2)
                   : customerDetail.carInfo.owner}
               </p>
+            </div>
+            <div>
+              <h4>車牌</h4>
+              <p>{customerDetail.carInfo.plate}</p>
+            </div>
+            <div>
+              <h4>車型</h4>
+              <p>{customerDetail.carInfo.model}</p>
             </div>
           </div>
         </Card>

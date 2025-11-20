@@ -60,11 +60,13 @@ const CarStatus = () => {
                         }
                     });
 
-                    // 轉換成圖表數據格式
-                    const lifePrediction = Object.entries(partFailureMap).map(([name, percentage]) => ({
-                        name: name,
-                        percentage: parseFloat(percentage)
-                    }));
+                    // 轉換成圖表數據格式並按故障率從高到低排序
+                    const lifePrediction = Object.entries(partFailureMap)
+                        .map(([name, percentage]) => ({
+                            name: name,
+                            percentage: parseFloat(percentage)
+                        }))
+                        .sort((a, b) => b.percentage - a.percentage);
 
                     // 根據故障率生成維修建議
                     const maintenanceItems = lifePrediction
@@ -85,7 +87,7 @@ const CarStatus = () => {
 
                             return {
                                 level: level,
-                                item: `檢修/更換 ${item.name}`,
+                                item: `${item.name}`,
                                 cost: cost
                             };
                         })
@@ -222,7 +224,7 @@ const CarStatus = () => {
                 }}>
                 </div>
             </div>
-            <Button className='retutnButton' onClick={() => navigate(-1)} >
+            <Button className='back-button' onClick={() => navigate(-1)} >
                 返回
             </Button>
             <div className="car-status-container">

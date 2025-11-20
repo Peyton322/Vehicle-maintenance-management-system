@@ -80,7 +80,7 @@ const RepairConfirmation = () => {
                 }}>
                 </div>
             </div>
-            <Button className='retutnButton' onClick={() => navigate(-1)} >
+            <Button className='back-button' onClick={() => navigate(-1)} >
                 返回
             </Button>
             <div className="repair-confirmation-container">

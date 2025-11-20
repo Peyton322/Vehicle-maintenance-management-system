@@ -60,6 +60,7 @@
   border-radius: 12px;
   margin-bottom: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e6e6e6;
 }
 
 .alert-card.alert-error {
@@ -118,6 +119,7 @@
 .maintenance-item:hover {
   transform: translateX(4px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e6e6e6;
 }
 
 .maintenance-item.urgent {
@@ -287,21 +289,34 @@
   box-shadow: 0 2px 8px rgba(107, 114, 128, 0.3);
 }
 
-.retutnButton {
+.back-button {
   background-color: white !important;
   border: 2px solid #d1d5db !important;
-  border-radius: 8px !important;
+  border-radius: 12px !important;
   color: #4b5563 !important;
-  margin: 10px 20px;
-  font-weight: 500;
-  transition: all 0.2s ease;
+  margin: 10px 20px 20px 20px;
+  padding: 10px 24px !important;
+  font-weight: 600;
+  font-size: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  height: 44px !important;
 }
 
-.retutnButton:hover {
+.back-button:hover {
   background-color: #f9fafb !important;
   border-color: #6b7280 !important;
-  color: #6b7280 !important;
+  color: #374151 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
+
+.back-button:focus {
+  background-color: white !important;
+  border-color: #d1d5db !important;
+  color: #4b5563 !important;
+}
+
 
 /* Responsive */
 @media (max-width: 768px) {

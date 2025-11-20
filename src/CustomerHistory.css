@@ -1,47 +1,153 @@
 .customer-history {
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 24px;
 }
 
 .back-button {
-    margin-bottom: 20px;
-    color: rgba(0, 0, 0, 0.88) !important;
-    border-color: #d9d9d9 !important;
-    /* 默認邊框顏色 */
+    background-color: white !important;
+    border: 2px solid #d1d5db !important;
+    border-radius: 12px !important;
+    color: #4b5563 !important;
+    margin: 10px 20px 20px 20px;
+    padding: 10px 24px !important;
+    font-weight: 600;
+    font-size: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    height: 44px !important;
 }
 
 .back-button:hover {
-    /* 注意這裡是 :hover 而不是 .hover */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    color: rgba(0, 0, 0, 0.88) !important;
-    border-color: #898989 !important;
-    /* hover 時的邊框顏色 */
+    background-color: #f9fafb !important;
+    border-color: #6b7280 !important;
+    color: #374151 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.back-button:focus {
+    background-color: white !important;
+    border-color: #d1d5db !important;
+    color: #4b5563 !important;
 }
 
 .info-card {
     margin-bottom: 24px;
-    background-color: #F5F5F5;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e6e6e6;
+    transition: all 0.3s ease;
+}
+
+.info-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.info-card .ant-card-head {
+    background-color: #eeeeee;
+    border-bottom: 1px solid #bdbdbd;
+    font-weight: 600;
+    color: #1f2937;
+    font-size: 16px;
+}
+
+.info-card .ant-card-body {
+    padding: 24px;
 }
 
 .info-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 20px;
+    gap: 24px;
+}
 
+.info-grid h4 {
+    color: #6b7280;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.info-grid p {
+    color: #1f2937;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
 }
 
 .stats-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    gap: 24px;
     margin-bottom: 24px;
+}
 
+.stats-grid .info-card h4 {
+    color: #6b7280;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .stats-number {
-    font-size: 24px;
-    font-weight: bold;
+    font-size: 32px;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0;
 }
 
 .error-container {
     padding: 24px;
+}
+
+/* 表格樣式優化 */
+.customer-history .ant-table-wrapper {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e6e6e6;
+    overflow: hidden;
+}
+
+.customer-history .ant-table-thead>tr>th {
+    background-color: #f9fafb;
+    color: #374151;
+    font-weight: 600;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.customer-history .ant-table-tbody>tr:hover>td {
+    background-color: #f9fafb;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .customer-history {
+        padding: 16px;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .stats-number {
+        font-size: 24px;
+    }
+
+    .back-button {
+        margin: 10px;
+    }
 }
