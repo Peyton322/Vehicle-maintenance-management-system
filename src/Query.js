@@ -251,15 +251,15 @@ const Query = () => {
           {/*當 activeQuery === 'customer' 為真時，會添加 'active' class 這樣可以通過 CSS 來改變按鈕的外觀，表示當前是否處於激活狀態*/}
           <Button
             className={`query-button ${activeQuery === 'customer' ? 'active' : ''}`}
-            onClick={() => setActiveQuery('customer')} /*當點擊按鈕時，會觸發函數，將 activeQuery 設置為 'customer'*/
-            icon={<span>👤</span>}
+            onClick={() => setActiveQuery('customer')} /*當點擊按鈕時,會觸發函數,將 activeQuery 設置為 'customer'*/
+            icon={<img src={require("./images/profile.png")} alt="customer" style={{ width: '18px', height: '18px', verticalAlign: 'middle' }} />}
           >
             歷史資料-客戶查詢
           </Button>
           <Button
             className={`query-button ${activeQuery === 'maintenance' ? 'active' : ''}`}
             onClick={() => setActiveQuery('maintenance')}
-            icon={<span>🚗</span>}
+            icon={<img src={require("./images/steering-wheel.png")} alt="maintenance" style={{ width: '18px', height: '18px', verticalAlign: 'middle' }} />}
           >
             維修-車牌查詢
           </Button>
