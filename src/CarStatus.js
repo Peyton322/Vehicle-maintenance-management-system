@@ -231,8 +231,10 @@ const CarStatus = () => {
                 {/* 車輛基本資訊 */}
 
                 <Card className="status-card" bordered={false}>
-                    <h2 className="status-title">車輛資訊</h2>
-                    <div className="info-grid">
+                    <h2 className="title">
+                        車輛資訊
+                    </h2>
+                    <div className="grid">
                         <div className="info-item">
                             <div className="info-label">車牌號碼</div>
                             <div className="info-value">{carData.plateNumber}</div>

@@ -6,6 +6,14 @@ import { useNavigate } from 'react-router-dom';
 import { UpOutlined } from '@ant-design/icons'; // 引入上箭頭圖標
 import './query.css'
 
+// 配置 message 的全局設定
+message.config({
+  top: 100,
+  duration: 3,
+  maxCount: 3,
+  getContainer: () => document.body,
+});
+
 const Query = () => {
   const [activeQuery, setActiveQuery] = useState('customer'); // 初始值設為 'customer'
   // 歷史資料-客戶查詢
@@ -13,6 +21,7 @@ const Query = () => {
   const [searchPhone, setSearchPhone] = useState('');
   const [searchStatus, setSearchStatus] = useState('');
   const [showTopButton, setShowTopButton] = useState(false); // 控制按鈕顯示隱藏
+  const [searchPlateNumber, setSearchPlateNumber] = useState(''); // 歷史查詢用的車牌
   // 維修-車牌查詢
   const [plateNumber, setPlateNumber] = useState('');
   const [description, setDescription] = useState('');
@@ -127,26 +136,38 @@ const Query = () => {
     setSearchName(values.name || '');
     setSearchPhone(values.phone || '');
     setSearchStatus(values.status || '');
-    setPlateNumber(values.plate || '');
+    setSearchPlateNumber(values.plate || '');
+  };
+
+  // 處理清除搜尋條件
+  const handleClear = (form) => {
+    form.resetFields(); // 清空表單
+    setSearchName('');
+    setSearchPhone('');
+    setSearchStatus('');
+    setSearchPlateNumber('');
+    message.success('已清除所有搜尋條件');
   };
 
   // 過濾邏輯
   const filteredCustomers = customerData.filter((customer) => {
     const nameMatch = searchName ? customer.name.includes(searchName) : true;
     const phoneMatch = searchPhone ? customer.phone.includes(searchPhone) : true;
-    const plateMatch = plateNumber ? customer.carInfo.plate.includes(plateNumber) : true;
+    const plateMatch = searchPlateNumber ? customer.carInfo.plate.includes(searchPlateNumber) : true;
     const statusMatch = searchStatus ? customer.status === searchStatus : true;
     return nameMatch && phoneMatch && statusMatch && plateMatch;
   });
 
   const handleGoClick = async () => {
     // 表單驗證
-    if (!plateNumber.trim()) {
-      message.error('請輸入車牌號碼');
+    if (!plateNumber || !plateNumber.trim()) {
+      alert('錯誤: 請輸入車牌號碼');
+      message.error('錯誤: 請輸入車牌號碼');
+      console.log('驗證失敗：車牌號碼為空'); // 除錯用
       return;
     }
 
-    // 如果沒有輸入描述，使用預設值 "無"
+    // 如果沒有輸入描述,使用預設值 "無"
     const finalDescription = description.trim() || '無';
 
     setLoading(true); // 開始載入
@@ -243,8 +264,12 @@ const Query = () => {
           src={require("./images/front-car.png")}
           alt="maintenance"
         />
-        <h1>車輛維修管理系統</h1>
+        <div>
+          <h1>車輛維修管理系統</h1>
+          <p className='subtitle'>Vehicle Maintenance Management System</p>
+        </div>
       </div>
+
       <div className='query_container'>
         {/* Button Group */}
         <div className="button-group">
@@ -273,47 +298,46 @@ const Query = () => {
               layout="vertical"
               onFinish={handleSearch}
             >
-              <Form.Item
-                label="車牌查詢"
-                name="plate"
-              >
-                <Input placeholder="輸入車牌號碼..." />
-              </Form.Item>
+              {(_, form) => (
+                <>
+                  <Form.Item
+                    label="車牌查詢"
+                    name="plate"
+                  >
+                    <Input placeholder="輸入車牌號碼..." />
+                  </Form.Item>
 
 
-              <Form.Item
-                label="姓名查詢"
-                name="name"
-              >
-                <Input placeholder="輸入姓名..." />
-              </Form.Item>
+                  <Form.Item
+                    label="姓名查詢"
+                    name="name"
+                  >
+                    <Input placeholder="輸入姓名..." />
+                  </Form.Item>
 
-              <Form.Item
-                label="電話查詢"
-                name="phone"
-              >
-                <Input placeholder="輸入聯絡電話..." />
-              </Form.Item>
+                  <Form.Item
+                    label="電話查詢"
+                    name="phone"
+                  >
+                    <Input placeholder="輸入聯絡電話..." />
+                  </Form.Item>
 
-              <Form.Item
-                label="狀態查詢"
-                name="status"
-              >
-                <Select
-                  placeholder="狀態..."
-                  options={[
-                    { value: '優良', label: '優良' },
-                    { value: '良好', label: '良好' },
-                    { value: '不佳', label: '不佳' }
-                  ]}
-                />
-              </Form.Item>
-
-              <Form.Item>
-                <Button className='button' type="primary" htmlType="submit" style={{ width: '100%' }}>
-                  查詢
-                </Button>
-              </Form.Item>
+                  <Form.Item>
+                    <div style={{ display: 'flex', gap: '12px' }}>
+                      <Button className='button' type="primary" htmlType="submit" style={{ flex: 1 }}>
+                        查詢
+                      </Button>
+                      <Button
+                        className='button clear-button'
+                        onClick={() => handleClear(form)}
+                        style={{ flex: 1 }}
+                      >
+                        清除
+                      </Button>
+                    </div>
+                  </Form.Item>
+                </>
+              )}
             </Form>
 
             {dataLoading ? (
@@ -330,7 +354,10 @@ const Query = () => {
               </div>
             ) : (
               <div className="customer-list">
-                <h2>所有客戶資料</h2>
+                <div className='list-header'>
+                  <h2>所有客戶資料</h2>
+                  <span className='list-count'>共 {filteredCustomers.length} 筆記錄</span>
+                </div>
                 {filteredCustomers.map((customer, index) => {
                   const anonymizedName = customer.name.length > 1
                     ? customer.name[0] + 'O' + customer.name.slice(2)
@@ -340,10 +367,10 @@ const Query = () => {
                       <div className="customer-name">{anonymizedName}</div>
                       <div className="customer-phone">電話 : {customer.phone}</div>
                       <div className="customer-car">
-                        車型 :  {customer.carInfo.plate} {customer.carInfo.model}
+                        車牌 : {customer.carInfo.plate}  車型 : {customer.carInfo.model}
                       </div>
                       <div className="maintenance-info">
-                        <div>最近維修：{customer.lastMaintenance}</div>
+                        <div>最近維修: {customer.lastMaintenance}</div>
                       </div>
                       <Button className="detail-button"
                         onClick={() => navigate(`/customer-history/${customer.carInfo.plate}`)}>

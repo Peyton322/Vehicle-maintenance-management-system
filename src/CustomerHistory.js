@@ -205,11 +205,11 @@ const CustomerHistory = () => {
         }}>
         </div>
       </div>
-      <div className="customer-history">
-        <Button onClick={() => navigate(-1)} className="back-button">
-          返回
-        </Button>
 
+      <Button onClick={() => navigate(-1)} className="back-button">
+        返回
+      </Button>
+      <div className="customer-history">
         <Card className="info-card">
           <div className="info-grid">
             <div>

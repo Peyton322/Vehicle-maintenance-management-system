@@ -31,6 +31,38 @@
     color: white !important;
 }
 
+.button.clear-button {
+    background: #ffffff !important;
+    border: 1px solid #919191 !important;
+    color: #6b7280 !important;
+    border-radius: 10px;
+    font-weight: 500;
+    height: 44px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease !important;
+}
+
+.button.clear-button:hover {
+    background: #f5f5f5 !important;
+    border-color: #4b5563 !important;
+    color: #6b7280 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.button.clear-button:active {
+    transform: translateY(0);
+    background: #ffffff !important;
+    border: 1px solid #374151 !important;
+    color: #6b7280 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.button.clear-button:focus {
+    background: #f5f5f5 !important;
+    border: 1px solid #6b7280 !important;
+    color: #6b7280 !important;
+}
 
 .title {
     display: flex;
@@ -47,12 +79,68 @@
     margin: 0;
 }
 
+.title .subtitle {
+    font-size: 13px;
+    color: #6b7280;
+    margin-top: 4px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+}
+
 .title img {
     width: 50px;
     height: 50px;
     object-fit: contain;
 }
 
+
+.stats-overview {
+    max-width: 700px;
+    margin: 0 auto 32px auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.stat-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.stat-icon {
+    font-size: 32px;
+    line-height: 1;
+}
+
+.stat-content {
+    flex: 1;
+}
+
+.stat-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 4px;
+}
+
+.stat-label {
+    font-size: 13px;
+    color: #6b7280;
+    font-weight: 500;
+}
 
 .query_container {
     max-width: 700px;
@@ -72,6 +160,42 @@
     font-weight: 500;
     color: #374151;
     font-size: 14px;
+}
+
+.query_container .ant-input:hover,
+.query_container .ant-input-textarea:hover,
+.query_container .ant-input-textarea:hover textarea,
+.query_container .ant-input-textarea textarea:hover,
+.query_container .ant-input-textarea.ant-input-textarea-show-count:hover::after,
+.query_container .ant-select:hover .ant-select-selector {
+    border-color: #6b7280 !important;
+}
+
+.query_container .ant-input:focus,
+.query_container .ant-input:focus-within,
+.query_container .ant-input-textarea:focus,
+.query_container .ant-input-textarea:focus-within,
+.query_container .ant-input-textarea:focus textarea,
+.query_container .ant-input-textarea textarea:focus,
+.query_container .ant-input-textarea.ant-input-textarea-show-count:focus::after,
+.query_container .ant-select-focused .ant-select-selector,
+.query_container .ant-input-affix-wrapper:focus,
+.query_container .ant-input-affix-wrapper-focused {
+    border-color: #6b7280 !important;
+    box-shadow: 0 0 0 2px rgba(107, 114, 128, 0.1) !important;
+    outline: 0 !important;
+}
+
+.query_container .ant-input:active,
+.query_container .ant-input-textarea:active,
+.query_container .ant-input-textarea textarea:active {
+    border-color: #6b7280 !important;
+}
+
+/* 額外覆蓋 Ant Design 預設的藍色樣式 */
+.query_container .ant-input-textarea-show-count:hover::after,
+.query_container .ant-input-textarea-show-count:focus::after {
+    color: #6b7280 !important;
 }
 
 .button-group {
@@ -127,12 +251,32 @@
     padding: 0;
 }
 
-.customer-list h2 {
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 24px;
-    font-size: 20px;
+    padding: 16px 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb;
+}
+
+.customer-list h2 {
+    font-size: 18px;
     font-weight: 600;
     color: #1f2937;
-    padding-left: 4px;
+    margin: 0;
+}
+
+.list-count {
+    font-size: 14px;
+    color: #6b7280;
+    font-weight: 500;
+    background: #f3f4f6;
+    padding: 4px 12px;
+    border-radius: 20px;
 }
 
 .customer-card {
@@ -151,33 +295,77 @@
     transform: translateY(-2px);
 }
 
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
 .customer-name {
     font-size: 18px;
     font-weight: 600;
-    margin-bottom: 12px;
     color: #1f2937;
+    margin: 0;
+}
+
+.status-badge {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-badge.status-good {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.status-badge.status-normal {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.status-badge.status-bad {
+    background: #fee2e2;
+    color: #991b1b;
 }
 
 .customer-phone {
-    color: #6b7280;
+    color: #4b5563;
     margin-bottom: 10px;
     font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
 .customer-car {
     background-color: #f9fafb;
-    padding: 12px;
+    padding: 12px 16px;
     border-radius: 8px;
     margin-bottom: 10px;
     color: #374151;
     font-size: 14px;
     border: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
 }
 
 .maintenance-info {
     color: #6b7280;
     margin-bottom: 16px;
-    font-size: 14px;
+    font-size: 13px;
+}
+
+.maintenance-info div {
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
 .detail-button {
@@ -203,4 +391,75 @@
     background-color: #f3f4f6 !important;
     border-color: #d1d5db !important;
     color: #374151 !important;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .stats-overview {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .stat-card {
+        padding: 16px;
+    }
+
+    .title {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .title h1 {
+        font-size: 24px;
+    }
+
+    .list-header {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+    }
+
+    .customer-card {
+        padding: 20px;
+    }
+
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+}
+
+/* 強制覆蓋 Ant Design TextArea 的 hover 藍色邊框 - 所有可能的選擇器 */
+.query_container .ant-input-textarea-show-count:hover,
+.query_container .ant-input-textarea-show-count:not(.ant-input-textarea-disabled):hover,
+.query_container .ant-input-textarea:hover,
+.query_container .ant-input-textarea:not(.ant-input-textarea-disabled):hover,
+.query_container span.ant-input-textarea:hover,
+.query_container span.ant-input-textarea-show-count:hover,
+.query_container .ant-input-textarea .ant-input:hover,
+.query_container .ant-input-textarea-show-count .ant-input:hover,
+.query_container .ant-input-textarea:hover .ant-input,
+.query_container .ant-input-textarea:not(.ant-input-textarea-disabled):hover .ant-input,
+.query_container .ant-input-textarea:hover textarea,
+.query_container .ant-input-textarea:not(.ant-input-textarea-disabled):hover textarea,
+.query_container .ant-input-textarea textarea:hover,
+.query_container .ant-input-textarea-show-count textarea:hover,
+.query_container textarea.ant-input:hover {
+    border-color: #6b7280 !important;
+}
+
+.query_container .ant-input:hover,
+.query_container .ant-input:not(.ant-input-disabled):hover,
+.query_container input.ant-input:hover {
+    border-color: #6b7280 !important;
+}
+
+/* 確保 Ant Design message 元件能正確顯示 */
+.ant-message {
+    z-index: 9999 !important;
+}
+
+.ant-message-notice-content {
+    z-index: 9999 !important;
 }

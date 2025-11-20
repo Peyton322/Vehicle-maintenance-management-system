@@ -66,16 +66,16 @@
 
 .info-grid h4 {
     color: #6b7280;
-    font-size: 14px;
+    font-size: 20px;
     font-weight: 500;
-    margin-bottom: 8px;
+    margin-bottom: px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
 .info-grid p {
     color: #1f2937;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 600;
     margin: 0;
 }
@@ -89,7 +89,7 @@
 
 .stats-grid .info-card h4 {
     color: #6b7280;
-    font-size: 14px;
+    font-size: 20px;
     font-weight: 500;
     margin-bottom: 12px;
     text-transform: uppercase;
@@ -97,7 +97,7 @@
 }
 
 .stats-number {
-    font-size: 32px;
+    font-size: 20px;
     font-weight: 700;
     color: #1f2937;
     margin: 0;
@@ -125,6 +125,33 @@
 
 .customer-history .ant-table-tbody>tr:hover>td {
     background-color: #f9fafb;
+}
+
+.customer-history .ant-table-tbody>tr.ant-table-row-selected>td {
+    background-color: #f3f4f6;
+    border-color: #6b7280;
+}
+
+/* 覆蓋 Ant Design 表格的 active 狀態邊框顏色 */
+.customer-history,
+.customer-history .customer-history {
+    border-color: #6b7280 !important;
+}
+
+.customer-history .ant-pagination-item-active {
+    border-color: #6b7280 !important;
+}
+
+.customer-history .ant-pagination-item-active a {
+    color: #6b7280 !important;
+}
+
+.customer-history .ant-pagination-item:hover {
+    border-color: #6b7280 !important;
+}
+
+.customer-history .ant-pagination-item:hover a {
+    color: #6b7280 !important;
 }
 
 /* 響應式設計 */

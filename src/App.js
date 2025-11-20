@@ -27,23 +27,11 @@ const App = () => {
   return (
     <div>
       <div className='background'>
-        <img
-          src={require("./images/maintenance.png")}
-          style={{
-            width: '100%',
-            height: '200px',
-            objectFit: 'contain',
-            maxWidth: '100%',
-            objectPosition: 'center',
-            display: 'block',
-          }}
-          alt="maintenance"
-        />
       </div>
       <div className='form'>
-        <div style={{ marginLeft: '120px' }}>
-          <h1>Welcome!</h1>
-          <h1>Maintenance personnel</h1>
+        <div className='vehicle' style={{ marginLeft: '120px', textAlign: 'center', marginBottom: '20px' }}>
+          <h1>車輛維修管理系統登入</h1>
+          <h1>Vehicle Maintenance Management System</h1>
         </div>
         <Form
           name="basic"
