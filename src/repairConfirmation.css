@@ -141,3 +141,34 @@ body {
   border-color: #6b7280 !important;
   /* Change this to your desired color */
 }
+
+/* Input 輸入框 hover 和 focus 樣式 */
+.repair-confirmation-container .ant-input:hover,
+.repair-confirmation-container .ant-input-textarea:hover,
+.repair-confirmation-container .ant-input-textarea:hover textarea,
+.repair-confirmation-container .ant-input-textarea textarea:hover,
+.repair-confirmation-container .ant-input-textarea.ant-input-textarea-show-count:hover::after,
+.repair-confirmation-container .ant-select:hover .ant-select-selector {
+  border-color: #6b7280 !important;
+}
+
+.repair-confirmation-container .ant-input:focus,
+.repair-confirmation-container .ant-input:focus-within,
+.repair-confirmation-container .ant-input-textarea:focus,
+.repair-confirmation-container .ant-input-textarea:focus-within,
+.repair-confirmation-container .ant-input-textarea:focus textarea,
+.repair-confirmation-container .ant-input-textarea textarea:focus,
+.repair-confirmation-container .ant-input-textarea.ant-input-textarea-show-count:focus::after,
+.repair-confirmation-container .ant-select-focused .ant-select-selector,
+.repair-confirmation-container .ant-input-affix-wrapper:focus,
+.repair-confirmation-container .ant-input-affix-wrapper-focused {
+  border-color: #6b7280 !important;
+  box-shadow: 0 0 0 2px rgba(107, 114, 128, 0.1) !important;
+  outline: 0 !important;
+}
+
+.repair-confirmation-container .ant-input:active,
+.repair-confirmation-container .ant-input-textarea:active,
+.repair-confirmation-container .ant-input-textarea textarea:active {
+  border-color: #6b7280 !important;
+}
