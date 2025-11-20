@@ -38,6 +38,7 @@ const RepairConfirmation = () => {
     const [customItems, setCustomItems] = useState([]); // 存放使用者新增的維修項目
     const [newItem, setNewItem] = useState({ item: '', cost: '', selected: true });
     const [showAllRecommendedItems, setShowAllRecommendedItems] = useState(false);
+    const [isConfirming, setIsConfirming] = useState(false); // 確認按鈕載入狀態
 
     // 切換建議維修項目的選擇狀態
     const handleCheckboxChange = (index, type) => {
@@ -68,6 +69,16 @@ const RepairConfirmation = () => {
         const updatedCustomItems = customItems.filter((_, i) => i !== index);
         setCustomItems(updatedCustomItems);
     };
+
+    // 處理確認維修項目
+    const handleConfirm = () => {
+        setIsConfirming(true);
+        // 延遲 1.5 秒後跳轉頁面
+        setTimeout(() => {
+            navigate('/endPage');
+        }, 1500);
+    };
+
     return (
 
         <div>
@@ -136,13 +147,19 @@ const RepairConfirmation = () => {
                         <p>尚未新增維修項目.....</p>
                     )}
                 </div>
+                <div className='status-card'>
+                    <h3 className='cost'>預估總金額: NT${totalCost}</h3>
+                    <Button
+                        className="button"
+                        onClick={handleConfirm}
+                        loading={isConfirming}
+                        disabled={isConfirming}
+                    >
+                        {isConfirming ? '處理中...' : '確認維修項目'}
+                    </Button>
+                </div>
 
-                <Card className='status-card' >
-                    <h2>預估總金額: NT${totalCost}</h2>
 
-                </Card>
-
-                <Button className="button" onClick={() => navigate('/endPage')}>確認維修項目</Button>
 
             </div>
 
